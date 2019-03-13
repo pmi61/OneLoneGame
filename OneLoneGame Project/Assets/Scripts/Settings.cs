@@ -5,10 +5,19 @@ using UnityEngine.Audio;
 
 public class Settings : MonoBehaviour {
 
-    public AudioMixer audioMixer;
-
-	public void setVolume(float volume)
+    public AudioMixer MainVolume;
+    public AudioMixer MusicVolume;
+    public AudioMixer EffectsVolume;
+	public void setMainVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        MainVolume.SetFloat("Volume", volume);
+    }
+    public void setMusicVolume(float volume)
+    {
+        MusicVolume.SetFloat("Volume", volume);
+    }
+    public void setEffectsVolume(float volume)
+    {
+        EffectsVolume.SetFloat("Volume", volume);
     }
 }
