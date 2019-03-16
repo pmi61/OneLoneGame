@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioScript : MonoBehaviour
+public class Audio : MonoBehaviour
 {
     private void Awake()
     {
