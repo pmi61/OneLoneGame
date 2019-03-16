@@ -26,21 +26,25 @@ public class Player : MonoBehaviour
             {
                 player.transform.position += player.transform.up * speed * Time.deltaTime;
                 player.GetComponent<SpriteRenderer>().sprite = Up;
+                player.GetComponent<SpriteMask>().sprite = Up;
             }
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 player.transform.position -= player.transform.up * speed * Time.deltaTime;
                 player.GetComponent<SpriteRenderer>().sprite = Down;
+                player.GetComponent<SpriteMask>().sprite = Down;
             }
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 player.transform.position -= player.transform.right * speed * Time.deltaTime;
                 player.GetComponent<SpriteRenderer>().sprite = Left;
+                player.GetComponent<SpriteMask>().sprite = Left;
             }
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 player.transform.position += player.transform.right * speed * Time.deltaTime;
                 player.GetComponent<SpriteRenderer>().sprite = Right;
+                player.GetComponent<SpriteMask>().sprite = Right;
             }
         }
     }
