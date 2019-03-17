@@ -7418,8 +7418,8 @@ GameObject:
   m_Component:
   - component: {fileID: 990563755}
   - component: {fileID: 990563754}
-  - component: {fileID: 990563753}
   - component: {fileID: 990563756}
+  - component: {fileID: 990563753}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -7436,16 +7436,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 990563752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8545bc5d05c6d344a0e0bbc6184a22d, type: 3}
+  m_Script: {fileID: 11500000, guid: e6997f20a9d051346a77681055862712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 990563752}
-  Up: {fileID: 21300000, guid: 2bb8f0a12da5ef345b19fc0053e4b4ce, type: 3}
-  Down: {fileID: 21300000, guid: 5b93541b045411b4cbc9db6bb69f1396, type: 3}
-  Left: {fileID: 21300000, guid: 899d1897bf0a57e49b11056cd784e49e, type: 3}
-  Right: {fileID: 21300000, guid: d12409993576b104a8b6de4a08dda942, type: 3}
+  speed: 6
   animator: {fileID: 990563756}
-  speed: 2
 --- !u!212 &990563754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7502,7 +7497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990563752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.24, y: -2.57, z: 0.192}
+  m_LocalPosition: {x: 0.24, y: -2.57, z: 0}
   m_LocalScale: {x: 5.0313, y: 2.4808, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -7520,7 +7515,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6cb202796a02a2d4292f0b4e596f06b2, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
