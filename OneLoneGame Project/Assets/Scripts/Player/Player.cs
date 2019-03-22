@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    Inventory inventory;
+
     /* Заберите это отсюда в GameManager */
     public GameObject canvas;
     public GameObject deathScreen;
@@ -120,4 +122,10 @@ public class Player : MonoBehaviour
                 healthUI.value -= 10;
         }
     }
+
+    public bool AttemptAdd(Item item)
+    {
+        return true;
+    }
+
 }
