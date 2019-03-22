@@ -16,7 +16,7 @@ TagManager:
   - Ground
   - Decorations
   - Creatures
-  - 
+  - UI
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Creature
     uniqueID: 1623455275
+    locked: 0
+  - name: UI
+    uniqueID: 3451671333
     locked: 0
