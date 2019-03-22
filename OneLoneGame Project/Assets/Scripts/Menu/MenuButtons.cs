@@ -8,11 +8,15 @@ public class MenuButtons : MonoBehaviour {
 	public void ExitButton()
     {
         Application.Quit();
-        Debug.Log("@$E#@E@#@#");
     }
 
-    public void SettingsButton()
+    public void PlayButton()
     {
-        return;
+        SceneManager.LoadScene("ExampleScene");
+
+    }
+    public void toMenuButton()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
