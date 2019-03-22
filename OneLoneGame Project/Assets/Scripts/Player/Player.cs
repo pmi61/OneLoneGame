@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public GameObject canvas;
     public GameObject deathScreen;
     /*                                    */
+    public Slider hungerUI;
+    public Image hungerUIcolor;
     public Slider healthUI;
     public Image healthUIcolor;
     public Slider staminaUI;
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
 
     public float StartSpeed;
     public float speed;//= .5f; выставляется через юнити, не здесь
+    public float hunger;
+    public float hungerDelta;
     public float health;
     public float stamina;
     public float staminaDelta;
@@ -44,6 +48,16 @@ public class Player : MonoBehaviour
             deathScreen.SetActive(true);
             canvas.GetComponent<Canvas>().enabled = true;
         }
+        // если голод
+        if (hunger < 0)
+            health -= 10 * Time.deltaTime;
+
+        if(hunger > 0)
+        hunger -= hungerDelta * Time.deltaTime;
+        hungerUI.value = hunger;
+        hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
+
+        healthUI.value = health;
         healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
         staminaUI.value = stamina;
         staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f,0.75f,1,1), staminaUI.value / staminaUI.maxValue * 100);
@@ -118,8 +132,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (healthUI.value > 0)
-                healthUI.value -= 10;
+            if (health > 0)
+                health -= 10;
         }
     }
 
