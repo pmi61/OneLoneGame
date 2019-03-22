@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Количество ячеек в инвентаре
+    private const int INVENTORY_CELLS_NUMBER = 5;
+
+    /* для столкновений с объектами */
+    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
+
+    private Inventory inventory; 
+
     public float speed;//= .5f; выставляется через юнити, не здесь
     public LayerMask layer;
     public Animator animator;
 
-    /* для столкновений с объектами */
-    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
 
     // Start is called before the first frame update
     void Start()
     {
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
-        
+
+        inventory = new Inventory(INVENTORY_CELLS_NUMBER);        
     }
 
     // Update is called once per frame
@@ -38,6 +45,21 @@ public class Player : MonoBehaviour
             animator.SetFloat("Magnitude", movement.magnitude);
 
             transform.position += movement * speed * Time.deltaTime;
+        }
+    }
+
+    public bool AttemptAdd(Item item)
+    {
+        if (inventory.AttemptAdd(item))
+        {
+            Debug.Log("Item added!");
+            inventory.PrintDebug();
+            return true;
+        }
+        else
+        {
+            Debug.Log("Can't add Item " + item.name);
+            return false;
         }
     }
 }
