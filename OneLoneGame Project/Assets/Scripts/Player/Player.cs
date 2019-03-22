@@ -38,6 +38,26 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
         boxCollider.enabled = true;                                     // включаем обратно
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
+            print("Current inventory index " + inventory.getCurrentIndex());
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            inventory.shiftCurrentIndex(Inventory.SHIFT_RIGHT);
+            print("Current inventory index " + inventory.getCurrentIndex());
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Item item = inventory.removeOne();
+            if (item != null)
+            {
+                item.drop();
+                inventory.PrintDebug();
+            }
+        }
+
         if (hit.transform == null) // если нет столкновения
         {
             animator.SetFloat("Horizontal", movement.x);

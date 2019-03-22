@@ -7,8 +7,13 @@ using UnityEngine;
 
 public class Inventory
 {
+    public const int SHIFT_LEFT = -1;
+    public const int SHIFT_RIGHT = 1;
+
     // Список ячеек инвентаря
     private List<Cell> inventoryCells;
+
+    private int currentIndex = 0;
 
     // Количество ячеек
     protected int cellNumber;
@@ -67,6 +72,79 @@ public class Inventory
         {
             return false;
         }
+    }
+
+    // Функция, которая удаляет из инвенторя один элемент по текущему индексу
+    public Item removeOne()
+    {
+        return removeOne(currentIndex);
+    }
+
+    // Функция, которая удаляет из инвентаря один элемент по указанному индексу
+    public Item removeOne(int index)
+    {
+        if (inventoryCells[index].IsEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            inventoryCells[index].number--;
+           
+            return inventoryCells[index].item;
+        }
+    }
+
+    public int getCurrentIndex()
+    {
+        return currentIndex;
+    }
+
+    // Функция для установки индекса текущей ячйки инвентаря
+    public void setCurrentIndex(int index)
+    {
+        if (index < 0)
+        {
+            currentIndex = 0;
+        }
+        else if (index >= cellNumber)
+        {
+            currentIndex = cellNumber - 1;
+        }
+        else
+        {
+            currentIndex = index;
+        }
+    }
+
+    // Функция для сдвига индекса текущей ячейки инвентаря
+    public void shiftCurrentIndex(int shiftDirection)
+    {
+        switch (shiftDirection)
+        {
+            case SHIFT_LEFT:
+                if (currentIndex == 0)
+                {
+                    currentIndex = cellNumber - 1;
+                }
+                else
+                {
+                    currentIndex--;
+                }
+                break;
+
+            case SHIFT_RIGHT:
+                if (currentIndex == cellNumber - 1)
+                {
+                    currentIndex = 0;
+                }
+                else
+                {
+                    currentIndex++;
+                }
+                break;
+        }
+
     }
 
     // Вывод содержимого в окно отладки
