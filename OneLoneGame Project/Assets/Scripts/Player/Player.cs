@@ -15,14 +15,6 @@ public class Player : MonoBehaviour
     public Image staminaUIcolor;
 
     public float StartSpeed;
-    // Количество ячеек в инвентаре
-    private const int INVENTORY_CELLS_NUMBER = 5;
-
-    /* для столкновений с объектами */
-    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
-
-    private Inventory inventory; 
-
     public float speed;//= .5f; выставляется через юнити, не здесь
     public float health;
     public float stamina;
@@ -30,6 +22,8 @@ public class Player : MonoBehaviour
     public LayerMask layer;
     public Animator animator;
 
+    /* для столкновений с объектами */
+    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +32,6 @@ public class Player : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         StartSpeed = speed;      
         
-
-        inventory = new Inventory(INVENTORY_CELLS_NUMBER);        
     }
 
     // Update is called once per frame
@@ -106,21 +98,6 @@ public class Player : MonoBehaviour
         {
             if (healthUI.value > 0)
                 healthUI.value -= 10;
-        }
-    }
-
-    public bool AttemptAdd(Item item)
-    {
-        if (inventory.AttemptAdd(item))
-        {
-            Debug.Log("Item added!");
-            inventory.PrintDebug();
-            return true;
-        }
-        else
-        {
-            Debug.Log("Can't add Item " + item.name);
-            return false;
         }
     }
 }
