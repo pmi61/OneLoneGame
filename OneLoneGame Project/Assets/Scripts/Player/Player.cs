@@ -43,24 +43,27 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()   
     {
-        if (healthUI.value == 0)
+        if (healthUI.value <= 0)
         {
-            deathScreen.SetActive(true);
-            canvas.GetComponent<Canvas>().enabled = true;
+            GameManager.instance.GameOver();
+
+            //canvas.GetComponent<Canvas>().enabled = true;
         }
         // если голод
-        if (hunger < 0)
+        if (hunger <= 0)
             health -= 10 * Time.deltaTime;
 
         if(hunger > 0)
-        hunger -= hungerDelta * Time.deltaTime;
+            hunger -= hungerDelta * Time.deltaTime;
         hungerUI.value = hunger;
         hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
 
         healthUI.value = health;
         healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
+
         staminaUI.value = stamina;
         staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f,0.75f,1,1), staminaUI.value / staminaUI.maxValue * 100);
+
         Vector3 movement = new Vector3();
         if (Input.GetKeyDown(KeyCode.Escape) && healthUI.value > 0)
         {
@@ -101,6 +104,7 @@ public class Player : MonoBehaviour
         boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
         RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
         boxCollider.enabled = true;                                     // включаем обратно
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
