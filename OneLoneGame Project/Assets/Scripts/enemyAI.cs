@@ -14,6 +14,14 @@ public class enemyAI : MonoBehaviour
     private bool isPlayerSeen = false;
 
     public float health;
+    public float Health
+    { set
+        {
+            health = Health;
+        }
+        get
+        { return health; }
+    }
     public float stamina;
     public float staminaDelta;
     public LayerMask layer;
@@ -39,7 +47,7 @@ public class enemyAI : MonoBehaviour
         if (!GameManager.instance.isGameRunning)
             return;
         if (health <= 0)
-            Destroy(this);
+            Destroy(gameObject);
         float distance = Vector2.Distance(transform.position, player.transform.position);
         if (distance < aggroDistance)
         {

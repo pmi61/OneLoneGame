@@ -10734,6 +10734,7 @@ MonoBehaviour:
   health: 100
   stamina: 100
   staminaDelta: 30
+  attackRadius: 0
   layer:
     serializedVersion: 2
     m_Bits: 1024
@@ -10794,7 +10795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990563752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.13, y: -2.105, z: 0}
+  m_LocalPosition: {x: -2.122, y: -2.105, z: 0}
   m_LocalScale: {x: 5.0313, y: 2.4808, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -12178,7 +12179,7 @@ GameObject:
   - component: {fileID: 1466261519}
   m_Layer: 10
   m_Name: monster_222
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12311,7 +12312,7 @@ MonoBehaviour:
   dir: 0
   player: {fileID: 990563752}
   aggroDistance: 10
-  health: 100
+  health: 10
   stamina: 50
   staminaDelta: 10
   layer:
