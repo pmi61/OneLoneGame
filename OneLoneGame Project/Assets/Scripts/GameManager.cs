@@ -8,6 +8,10 @@ class GameManager : MonoBehaviour
     //private GameObject canvas;
     private GameObject menus;
 
+    private GameObject deathScreen;
+
+    public bool isGameRunning;
+
     private void Awake()
     {
         Debug.Log("GameManaer Awake");
@@ -30,37 +34,21 @@ class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        InitGame();
     }
 
-    private void Update()
-    {
-
-    }
-
-    //this is called only once, and the paramter tell it to be called only after the scene was loaded
-    //(otherwise, our Scene Load callback would be called the very first load, and we don't want that)
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    static public void CallbackInitialization()
-    {
-        //register the callback to be called everytime the scene is loaded
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    //This is called each time a scene is loaded.
-    static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        instance.InitGame();
-    }
 
     void InitGame()
     {
         Debug.Log("In GameManager : InitGame()");
 
-        menus = GameObject.FindGameObjectWithTag("Menus");
+        isGameRunning = true;
+        menus = GameObject.Find("Menus");
 
         if (menus == null)
         {
-            Debug.Log("Can't find Menus");
+            Debug.Log("Can't find Death Screen");
         }
     }
 
@@ -68,7 +56,11 @@ class GameManager : MonoBehaviour
     {
         Debug.Log("In GameManager : GameOver()");
 
-        menus.transform.Find("DeathScreen").gameObject.SetActive(true);
+        //deathScreen.gameObject.SetActive(true);
+
+        menus.GetComponent<Canvas>().enabled = true;
+
+        isGameRunning = false;
         
         //Disable this GameManager.
         enabled = false;

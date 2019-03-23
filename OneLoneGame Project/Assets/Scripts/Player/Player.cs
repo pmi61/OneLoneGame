@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()   
     {
+        if (GameManager.instance.isGameRunning == false)
+        {
+            return;
+        }
+
         if (healthUI.value <= 0)
         {
             GameManager.instance.GameOver();
