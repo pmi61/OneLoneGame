@@ -8,7 +8,16 @@ class GameManager : MonoBehaviour
     //private GameObject canvas;
     private GameObject menus;
 
-    private GameObject deathScreen;
+    /* переменные для меню */
+    private bool isInMenu = false;
+
+    public bool IsInMenu
+    {
+        get
+        {
+            return isInMenu;
+        }
+    }
 
     public bool isGameRunning;
 
@@ -38,7 +47,6 @@ class GameManager : MonoBehaviour
         InitGame();
     }
 
-
     void InitGame()
     {
         Debug.Log("In GameManager : InitGame()");
@@ -56,7 +64,8 @@ class GameManager : MonoBehaviour
     {
         Debug.Log("In GameManager : GameOver()");
 
-        //deathScreen.gameObject.SetActive(true);
+        isInMenu = true;
+        menus.transform.Find("DeathScreen").gameObject.SetActive(true);
 
         menus.GetComponent<Canvas>().enabled = true;
 
@@ -64,6 +73,20 @@ class GameManager : MonoBehaviour
         
         //Disable this GameManager.
         enabled = false;
+    }
+
+    public void OnESC()
+    {
+        if (isInMenu)
+        {
+            menus.transform.Find("ESCMenu").gameObject.SetActive(false);
+        }
+        else
+        {           
+            menus.transform.Find("ESCMenu").gameObject.SetActive(true);
+        }
+        isInMenu = !isInMenu;
+        menus.GetComponent<Canvas>().enabled = !menus.GetComponent<Canvas>().enabled;
     }
 }
 

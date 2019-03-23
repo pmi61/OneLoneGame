@@ -10721,19 +10721,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6997f20a9d051346a77681055862712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1241284407}
-  deathScreen: {fileID: 1322436552}
   hungerUI: {fileID: 142872458}
   hungerUIcolor: {fileID: 2053789226}
   healthUI: {fileID: 773570501}
   healthUIcolor: {fileID: 842794625}
   staminaUI: {fileID: 1372287037}
   staminaUIcolor: {fileID: 1767974221}
-  StartSpeed: 3.5
+  startSpeed: 3.5
   speed: 3.5
   hunger: 100
   hungerDelta: 5
-  health: 100000000
+  health: 100
   stamina: 100
   staminaDelta: 30
   layer:
@@ -12312,16 +12310,16 @@ MonoBehaviour:
   dirChange: 0
   dir: 0
   player: {fileID: 990563752}
-  aggroDistance: 3
+  aggroDistance: 10
   health: 100
   stamina: 50
   staminaDelta: 10
   layer:
     serializedVersion: 2
     m_Bits: 512
-  arrowPrefab: {fileID: 1560772219014363053, guid: 53b47a95ebbea884e94518f45b50fa16,
+  arrowPrefab: {fileID: 6831335671126910692, guid: 191fd7de0c38ee042a03bf1ea6c44439,
     type: 3}
-  arrowStrenght: 2
+  arrowStrenght: 5
 --- !u!1 &1472223210
 GameObject:
   m_ObjectHideFlags: 0

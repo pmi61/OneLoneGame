@@ -8,8 +8,6 @@ public class Player : MonoBehaviour
     Inventory inventory;
 
     /* Заберите это отсюда в GameManager */
-    public GameObject canvas;
-    public GameObject deathScreen;
     /*                                    */
     public Slider hungerUI;
     public Image hungerUIcolor;
@@ -18,11 +16,32 @@ public class Player : MonoBehaviour
     public Slider staminaUI;
     public Image staminaUIcolor;
 
-    public float StartSpeed;
-    public float speed;//= .5f; выставляется через юнити, не здесь
+    public float startSpeed;
+    public float speed;
+    public float Speed
+    {
+        set { speed = value; }
+        get { return speed; }
+    }
     public float hunger;
+    public float Hunger
+    {
+        set { hunger = value; }
+        get { return hunger; }
+    }
     public float hungerDelta;
     public float health;
+    public float Health
+    {
+        set
+        {
+            health = value;
+        }
+        get
+        {
+            return health;
+        }
+    }
     public float stamina;
     public float staminaDelta;
     public LayerMask layer;
@@ -36,23 +55,21 @@ public class Player : MonoBehaviour
     {
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
-        StartSpeed = speed;      
-        
+        speed = startSpeed;           
     }
 
     // Update is called once per frame
     void Update()   
     {
-        if (GameManager.instance.isGameRunning == false)
+        if (!GameManager.instance.isGameRunning)
         {
             return;
         }
-
+        
         if (healthUI.value <= 0)
         {
             GameManager.instance.GameOver();
-
-            //canvas.GetComponent<Canvas>().enabled = true;
+            
         }
         // если голод
         if (hunger <= 0)
@@ -70,21 +87,20 @@ public class Player : MonoBehaviour
         staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f,0.75f,1,1), staminaUI.value / staminaUI.maxValue * 100);
 
         Vector3 movement = new Vector3();
-        if (Input.GetKeyDown(KeyCode.Escape) && healthUI.value > 0)
+        if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
-            canvas.GetComponent<Canvas>().enabled = !canvas.GetComponent<Canvas>().enabled;
-            canvas.transform.Find("ESCMenu").gameObject.SetActive(true);
+            GameManager.instance.OnESC();
             healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
             staminaUI.gameObject.SetActive(!staminaUI.gameObject.activeSelf);
         }
         else
         {
-            if (!canvas.GetComponent<Canvas>().enabled)
+            if (!GameManager.instance.IsInMenu)
             {
                 if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0f)
-                    speed = StartSpeed * 2;
+                    speed = startSpeed * 2;
                 if (Input.GetKeyUp(KeyCode.LeftShift) || stamina < 0.0f)
-                    speed = StartSpeed;
+                    speed = startSpeed;
                 if (Input.GetKey(KeyCode.W))
                     movement.y = 1;
                 if (Input.GetKey(KeyCode.A))
@@ -94,7 +110,7 @@ public class Player : MonoBehaviour
                 if (Input.GetKey(KeyCode.D))
                     movement.x = 1;
 
-                if (stamina > -1 && speed != StartSpeed)
+                if (stamina > -1 && speed != startSpeed)
                     stamina -= staminaDelta * Time.deltaTime;
                 else
                 if (stamina < 100)

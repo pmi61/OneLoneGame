@@ -24,69 +24,35 @@ public class enemyAI : MonoBehaviour
     public float arrowStrenght;
     private float last;
 
-   struct arrow
-    {
-       public GameObject arr;
-        public Vector3 direction;
-        public float str;
-        public float arrowDistance;
-        public float maxDistance;
-        public void Update()
-        {
-            arr.transform.position += direction * str * Time.deltaTime;
-            arrowDistance += str * Time.deltaTime;
-        }
-    }
-    private List<arrow> arrows;
-
     // Start is called before the first frame update
     void Start()
     {
         startSpeed = speed;
         dirChange = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
-        last = Time.time;
-        arrows = new List<arrow>();
-      
+        last = Time.time;    
 }
 
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.instance.isGameRunning)
+            return;
         if (health <= 0)
             Destroy(this);
         float distance = Vector2.Distance(transform.position, player.transform.position);
         if (distance < aggroDistance)
         {
-            float now = Time.time;
+            float now = Time.time;  
             Debug.Log( now - last);
             if (now - last > 2.0f)
             {
-                float rot = 0;
-                arrow ar = new arrow
-                {
-                    maxDistance = 1.0f,
-                    arr = Instantiate(arrowPrefab),
-                    str = arrowStrenght
-                };
-                ar.arr.transform.position = transform.position;
-                if (ar.arr.transform.position.x > player.transform.position.x)
-                {
-                    rot = Mathf.Asin(player.transform.position.y - (int)player.transform.position.y - ar.arr.transform.rotation.z);
-                }
-                else
-                {
-                    if (ar.arr.transform.position.y > player.transform.position.y)
-                        rot = -Mathf.Acos(player.transform.position.x - (int)player.transform.position.x - ar.arr.transform.rotation.z);
-                }
-                ar.arr.transform.Rotate(0,0, rot*180.0f/Mathf.PI);
-                ar.direction = player.transform.position - transform.position;
-                arrows.Add(ar);
+                var arrow = Instantiate(arrowPrefab);
+                arrow.transform.position = transform.position;
+                arrow.GetComponent<projectileScript>().Movement = (player.transform.position - transform.position).normalized;
+                arrow.GetComponent<projectileScript>().StartSpeed = arrowStrenght;
                 last = now;
             }
-           
-
-            
             Vector2 start = transform.position;
             Vector2 end = player.transform.position - (transform.position + new Vector3(boxCollider.size.x * movement.x, boxCollider.size.y * movement.y, 0));
             boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
@@ -104,15 +70,6 @@ public class enemyAI : MonoBehaviour
         }
             getMoveDir();
         transform.position += movement * speed * Time.deltaTime;
-        foreach (arrow arr in arrows)
-        {
-            arr.Update();            
-            if (arr.arrowDistance > arr.maxDistance)
-            {
-                Destroy(arr.arr);
-                arrows.Remove(arr);
-            }
-        }
     }
 
     void getMoveDir()
