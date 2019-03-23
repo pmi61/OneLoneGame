@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
             Item item = inventory.removeOne();
             if (item != null)
             {
-                item.drop();
+
                 inventory.PrintDebug();
             }
         }

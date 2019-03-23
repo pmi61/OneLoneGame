@@ -43,8 +43,8 @@ public class Inventory
                 // Если название предмета в текущей ячейке совпадает с названием добавляемого предмета
                 // И
                 // Если количество предметов в текущей ячейке меньше максимального
-                if (inventoryCells[i].item.name == item.name &&
-                    inventoryCells[i].number < item.maxInInvintoryCell)
+                if (inventoryCells[i].item.Name == item.Name &&
+                    inventoryCells[i].number < item.MaxInInvintoryCell)
                 {
                     // Добавляем предмет, увеличивая количество предметов
                     inventoryCells[i].number++;
@@ -163,7 +163,7 @@ public class Inventory
             }
             else
             {
-                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].item.name;
+                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].item.Name;
             }
 
             Debug.Log(cellString);
