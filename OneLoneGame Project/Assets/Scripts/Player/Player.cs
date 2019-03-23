@@ -97,11 +97,10 @@ public class Player : MonoBehaviour
 
         /* проверка на столкновение */
         Vector2 start = transform.position;
-        Vector2 end = transform.position + movement * speed * Time.deltaTime;
+        Vector2 end = transform.position + movement  * speed * Time.deltaTime + new Vector3(boxCollider.size.x * movement.x, boxCollider.size.y* movement.y, 0);
         boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
         RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
         boxCollider.enabled = true;                                     // включаем обратно
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
@@ -121,14 +120,14 @@ public class Player : MonoBehaviour
                 inventory.PrintDebug();
             }
         }
-
+       
         if (hit.transform == null) // если нет столкновения
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Magnitude", movement.magnitude);
 
-            transform.position += movement * speed * Time.deltaTime;
+            transform.position += movement.normalized * speed * Time.deltaTime;
         }
         else
         {
