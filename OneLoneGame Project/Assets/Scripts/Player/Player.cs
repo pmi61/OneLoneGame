@@ -73,9 +73,9 @@ public class Player : MonoBehaviour
         {
             if (!canvas.GetComponent<Canvas>().enabled)
             {
-                if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0)
+                if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0f)
                     speed = StartSpeed * 2;
-                if (Input.GetKeyUp(KeyCode.LeftShift))
+                if (Input.GetKeyUp(KeyCode.LeftShift) || stamina < 0.0f)
                     speed = StartSpeed;
                 if (Input.GetKey(KeyCode.W))
                     movement.y = 1;
