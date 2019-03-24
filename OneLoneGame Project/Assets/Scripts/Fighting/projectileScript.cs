@@ -18,6 +18,7 @@ public class projectileScript : MonoBehaviour
         }
     }
      private float speed;
+    public float damage;
     public GameObject player;
     private Vector3 movement;
     public Vector3 Movement
@@ -26,7 +27,7 @@ public class projectileScript : MonoBehaviour
     }
     public LayerMask layer;
     private float travelledDistance;
-    private float maxDistance = 15.0f;
+    private float maxDistance = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,17 +40,18 @@ public class projectileScript : MonoBehaviour
     void Update()
     {
         travelledDistance += speed * Time.deltaTime;
-        transform.position += movement * speed * Time.deltaTime;
-        Vector2 start = transform.position;
-        Vector2 end = transform.position + movement * speed * Time.deltaTime;
-        RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
-        if (hit.transform != null && hit.transform.tag == "Player")
-        {
-            player.GetComponent<Player>().Health -= 10;
-            Destroy(gameObject);
-        }
-        else
+        transform.position += movement * speed * Time.deltaTime;        
         if (travelledDistance > maxDistance)
             Destroy(gameObject);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    { 
+        if (collision.gameObject.tag == "Player")
+        collision.gameObject.GetComponent<Player>().health -= damage;
+        Destroy(gameObject);
+    }
+
+
 }
+

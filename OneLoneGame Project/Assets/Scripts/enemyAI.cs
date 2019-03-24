@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemyAI : MonoBehaviour
 {
+    public float offset;
     public Vector3 movement;
     public float startSpeed;
     public float speed;
@@ -26,15 +27,19 @@ public class enemyAI : MonoBehaviour
     public float staminaDelta;
     public LayerMask layer;
 
+    public Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     public GameObject arrowPrefab;
 
     public float arrowStrenght;
     private float last;
 
+    public FieldOfView FoW;
+
     // Start is called before the first frame update
     void Start()
     {
+        FoW = GetComponent<FieldOfView>();
         startSpeed = speed;
         dirChange = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
@@ -48,36 +53,29 @@ public class enemyAI : MonoBehaviour
             return;
         if (health <= 0)
             Destroy(gameObject);
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-        if (distance < aggroDistance)
+         float distance = Vector2.Distance(transform.position, player.transform.position);
+        if (FoW.visibleTargets.Contains(player.transform))
         {
-            float now = Time.time;  
-            Debug.Log( now - last);
+            isPlayerSeen = true;
+            float now = Time.time;
+            Debug.Log(now - last);
             if (now - last > 2.0f)
             {
                 var arrow = Instantiate(arrowPrefab);
-                arrow.transform.position = transform.position;
+                arrow.transform.position = (player.transform.position - transform.position).normalized + transform.position;
                 arrow.GetComponent<projectileScript>().Movement = (player.transform.position - transform.position).normalized;
                 arrow.GetComponent<projectileScript>().StartSpeed = arrowStrenght;
                 last = now;
             }
-            Vector2 start = transform.position;
-            Vector2 end = player.transform.position - (transform.position + new Vector3(boxCollider.size.x * movement.x, boxCollider.size.y * movement.y, 0));
-            boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
-            RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
-            boxCollider.enabled = true;                                     // включаем обратно
-            if (hit.transform == null)
-            {
-                isPlayerSeen = true;
                 movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
-            }
-            else
-            {
-                isPlayerSeen = false;
-            }
         }
+        else
+            isPlayerSeen = false;
+        if (distance > offset)
             getMoveDir();
-        transform.position += movement * speed * Time.deltaTime;
+        else
+            movement = new Vector3(0, 0, 0);
+        rb.velocity = movement * speed;
     }
 
     void getMoveDir()
@@ -85,10 +83,10 @@ public class enemyAI : MonoBehaviour
         if (!isPlayerSeen)
         {
         float now = Time.time;
-            if (now - dirChange > 0.5f) // если прошло больше 2х секунд
+            if (now - dirChange > 1f) 
             {
                 dirChange = Time.time;
-                dir = Random.Range(0, 4);
+                dir = Random.Range(0, 9);
                 switch (dir)
                 {
                     case 0:
@@ -102,8 +100,24 @@ public class enemyAI : MonoBehaviour
                         break;
                     case 3:
                             movement = new Vector3(0, -1, 0);
+                        break;                
+                    case 4:
+                        movement = new Vector3(1, 1, 0);
+                        break;
+                    case 5:
+                        movement = new Vector3(1, -1, 0);
+                        break;
+                    case 6:
+                        movement = new Vector3(-1, -1, 0);
+                        break;
+                    case 7:
+                        movement = new Vector3(-1, 1, 0);
+                        break;
+                    case 8:
+                        movement = new Vector3(0, 0, 0);
                         break;
                 }
+                movement.Normalize();
             }
         }
     }

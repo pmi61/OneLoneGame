@@ -157,17 +157,20 @@ public class Player : MonoBehaviour
                 {
                     GameObject tmp = Instantiate(slashPrefab);
                     tmp.transform.position = transform.position;
+                    tmp.GetComponent<SpriteRenderer>().flipX = true;
+                    tmp.GetComponent<SpriteRenderer>().flipY = true;
+
                     AttemptAttack(movement);
                 }
             }
         }
 
         /* проверка на столкновение */
-        Vector2 start = transform.position;
-        Vector2 end = transform.position + movement * speed * Time.deltaTime + new Vector3(boxCollider.size.x * movement.x, boxCollider.size.y * movement.y, 0);
-        boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
-        RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
-        boxCollider.enabled = true;                                     // включаем обратно
+        //Vector2 start = transform.position;
+        //Vector2 end = transform.position + movement * speed * Time.deltaTime + new Vector3(boxCollider.size.x * movement.x, boxCollider.size.y * movement.y, 0);
+        //boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
+        //RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
+        //boxCollider.enabled = true;                                     // включаем обратно
 
         // Для проверки работы инвентаря
         if (Input.GetKeyDown(KeyCode.Q))
@@ -190,8 +193,8 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (hit.transform == null) // если нет столкновения
-        {
+        //if (hit.transform == null) // если нет столкновения
+        //{
             if (movement != Vector3.zero)
             {
                 animator.SetFloat("Horizontal", movement.x);
@@ -199,13 +202,14 @@ public class Player : MonoBehaviour
             }
             animator.SetFloat("Magnitude", movement.normalized.magnitude);
 
-            transform.position += movement.normalized * speed * Time.deltaTime;
-        }
-        else
-        {
-            if (health > 0)
-                health -= 10;
-        }
+            rb.velocity = movement.normalized * speed;
+           // transform.position += movement.normalized * speed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    if (health > 0)
+        //        health -= 10;
+        //}
     }
 
     public bool AttemptAdd(Item item)
@@ -215,15 +219,14 @@ public class Player : MonoBehaviour
 
     private void AttemptAttack(Vector2 directionRange)
     {
-        Vector2 origin = new Vector2(transform.position.x, transform.position.y);
-        boxCollider.enabled = false;
-        Vector2 size = boxCollider.size;
-        //size += direction;
-        Collider2D hit = Physics2D.OverlapCircle((Vector2)transform.position + directionRange, attackRadius);
-        // RaycastHit2D hit = Physics2D.BoxCast(origin, boxCollider.size * 2, 0, direction);
-        boxCollider.enabled = true;
-        if (hit != null && hit.transform.tag == "Enemy")
-            hit.GetComponent<enemyAI>().health -= 10;
+        //Vector2 origin = new Vector2(transform.position.x, transform.position.y);
+        //boxCollider.enabled = false;
+        //Vector2 size = boxCollider.size;
+        ////size += direction;
+        //Collider2D hit = Physics2D.OverlapCircle((Vector2)transform.position + directionRange, attackRadius);
+        //// RaycastHit2D hit = Physics2D.BoxCast(origin, boxCollider.size * 2, 0, direction);
+        //boxCollider.enabled = true;
+        //if (hit != null && hit.transform.tag == "Enemy")
+        //    hit.GetComponent<enemyAI>().health -= 10;
     }
-
 }

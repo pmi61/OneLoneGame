@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8976135215891952501}
   m_Layer: 10
   m_Name: arrow 1
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2927460764040842300}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.224, y: 0.208, z: 1}
+  m_LocalScale: {x: 0.224, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afe4de5edbe4ab4fa203227724d0434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 33
   player: {fileID: 4428368735517191864, guid: 9e8b2abc741927042aea02e2581a1141, type: 3}
   layer:
     serializedVersion: 2
@@ -107,7 +108,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.19748056, y: 0.30719206}
