@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public Slider staminaUI;
     public Image staminaUIcolor;
 
+    public Rigidbody2D rb;
     public float startSpeed;
     public float speed;
     public float Speed
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
     public float stamina;
     public float staminaDelta;
 
-
+    public GameObject slashPrefab;
     public float attackRadius;
     private Vector2 direct;
     public LayerMask layer;
@@ -152,7 +153,9 @@ public class Player : MonoBehaviour
                     stamina += staminaDelta / 4 * Time.deltaTime;
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    AttemptAttack(direct);
+                    GameObject tmp = Instantiate(slashPrefab);
+                    tmp.transform.position = (Vector2)transform.position + direct*3;
+                    AttemptAttack(direct*2f);
                 }
             }
         }
@@ -184,21 +187,22 @@ public class Player : MonoBehaviour
                 inventory.PrintDebug();
             }
         }
-        
-            if (hit.transform == null) // если нет столкновения
-            {
-                animator.SetFloat("Horizontal", movement.x);
-                animator.SetFloat("Vertical", movement.y);
-                animator.SetFloat("Magnitude", movement.magnitude);
 
-                transform.position += movement.normalized * speed * Time.deltaTime;
-            }
-            else
-            {
-                if (health > 0)
-                    health -= 10;
-            }
+        //if (hit.transform == null) // если нет столкновения
+        //{
+        //    animator.SetFloat("Horizontal", movement.x);
+        //    animator.SetFloat("Vertical", movement.y);
+        //    animator.SetFloat("Magnitude", movement.magnitude);
 
+        //    transform.position += movement.normalized * speed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    if (health > 0)
+        //        health -= 10;
+        //}
+
+        rb.velocity = movement * speed;
        
     }
 
