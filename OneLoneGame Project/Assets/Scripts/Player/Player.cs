@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     Inventory inventory;
 
+    [Header("UI")]
     public Slider hungerUI;
     public Image hungerUIcolor;
     public Slider healthUI;
@@ -14,7 +15,10 @@ public class Player : MonoBehaviour
     public Slider staminaUI;
     public Image staminaUIcolor;
 
+    [Space]
+    [Header("Movement properties")]
     public Rigidbody2D rb;
+    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
     public float startSpeed;
     public float speed;
     public float Speed
@@ -22,6 +26,9 @@ public class Player : MonoBehaviour
         set { speed = value; }
         get { return speed; }
     }
+
+    [Space]
+    [Header("Life values")]
     public float hunger;
     public float Hunger
     {
@@ -44,19 +51,19 @@ public class Player : MonoBehaviour
     public float stamina;
     public float staminaDelta;
 
+    [Space]
+    [Header("Attack properties")]
     public GameObject slashPrefab;
     public float attackRadius;
     private Vector2 direct;
     public LayerMask layer;
     public Animator animator;
-
-    /* для столкновений с объектами */
-    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
+    
+    
 
     // Start is called before the first frame update
     void Start()
-    {
-        // facing = new Vector2(0, -1);
+    {       
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
@@ -65,36 +72,30 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (!GameManager.instance.isGameRunning)
         {
             return;
         }
-
-
-
-
-        // if (facing.x == -1 && facing.y == 0)
-        //    gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("horse1_19") as Sprite;
-        //if (facing.x == 1 && facing.y == 0)
-        //    gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("horse1_31") as Sprite;
-        //if (facing.y == -1 && facing.x == 0)
-        //    gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("horse1_49") as Sprite;
-        //if (facing.y == 1 && facing.x == 0)
-        //    gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load("horse1_37") as Sprite;
-
-
+        // проверка жизненых показателей
+        #region
         if (healthUI.value <= 0)
         {
             GameManager.instance.GameOver();
-
         }
-        // если голод
         if (hunger <= 0)
+        {
+            hungerUIcolor.enabled = false;
             health -= 10 * Time.deltaTime;
-
-        if (hunger > 0)
+        }
+        else
+        {
+            hungerUIcolor.enabled = true;
             hunger -= hungerDelta * Time.deltaTime;
+        }
+        #endregion
+
+        // обновление показателей интерфейса
+        #region
         hungerUI.value = hunger;
         hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
 
@@ -103,9 +104,20 @@ public class Player : MonoBehaviour
 
         staminaUI.value = stamina;
         staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
+        #endregion
 
-        // Для определения направления движения
+        // движение
+        #region
         Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        if (movement != Vector3.zero)
+        {
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+
+        }
+        animator.SetFloat("Magnitude", movement.normalized.magnitude);
+        rb.velocity = movement.normalized * speed;
+        #endregion
 
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
@@ -156,23 +168,17 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     GameObject tmp = Instantiate(slashPrefab);
-                    tmp.transform.position = transform.position;
+                    tmp.transform.position = transform.position + movement;
                     tmp.GetComponent<SpriteRenderer>().flipX = true;
                     tmp.GetComponent<SpriteRenderer>().flipY = true;
 
-                    AttemptAttack(movement);
+                    AttemptAttack(direct);
                 }
             }
         }
 
-        /* проверка на столкновение */
-        //Vector2 start = transform.position;
-        //Vector2 end = transform.position + movement * speed * Time.deltaTime + new Vector3(boxCollider.size.x * movement.x, boxCollider.size.y * movement.y, 0);
-        //boxCollider.enabled = false;                                    // выключаем коллайдер, чтоб не врезаться в самих себя
-        //RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
-        //boxCollider.enabled = true;                                     // включаем обратно
-
-        // Для проверки работы инвентаря
+        // работа инвентаря
+        #region
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
@@ -192,24 +198,8 @@ public class Player : MonoBehaviour
                 inventory.PrintDebug();
             }
         }
+        #endregion  
 
-        //if (hit.transform == null) // если нет столкновения
-        //{
-            if (movement != Vector3.zero)
-            {
-                animator.SetFloat("Horizontal", movement.x);
-                animator.SetFloat("Vertical", movement.y);
-            }
-            animator.SetFloat("Magnitude", movement.normalized.magnitude);
-
-            rb.velocity = movement.normalized * speed;
-           // transform.position += movement.normalized * speed * Time.deltaTime;
-        //}
-        //else
-        //{
-        //    if (health > 0)
-        //        health -= 10;
-        //}
     }
 
     public bool AttemptAdd(Item item)
@@ -217,16 +207,16 @@ public class Player : MonoBehaviour
         return true;
     }
 
-    private void AttemptAttack(Vector2 directionRange)
+    private void AttemptAttack(Vector2 direction)
     {
-        //Vector2 origin = new Vector2(transform.position.x, transform.position.y);
-        //boxCollider.enabled = false;
-        //Vector2 size = boxCollider.size;
-        ////size += direction;
-        //Collider2D hit = Physics2D.OverlapCircle((Vector2)transform.position + directionRange, attackRadius);
-        //// RaycastHit2D hit = Physics2D.BoxCast(origin, boxCollider.size * 2, 0, direction);
-        //boxCollider.enabled = true;
-        //if (hit != null && hit.transform.tag == "Enemy")
-        //    hit.GetComponent<enemyAI>().health -= 10;
+
+        Vector2 origin = (Vector2)transform.position + direction;
+        boxCollider.enabled = false;
+        Vector2 size = boxCollider.size;
+        Collider2D []hit = Physics2D.OverlapCircleAll((Vector2)transform.position + direction, attackRadius);
+        boxCollider.enabled = true;
+        foreach(Collider2D creature in hit)
+        if (creature != null && creature.transform.tag == "Enemy")
+            creature.GetComponent<enemyAI>().health -= 10;
     }
 }

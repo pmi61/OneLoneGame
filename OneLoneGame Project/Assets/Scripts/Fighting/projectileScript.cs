@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class projectileScript : MonoBehaviour
 {
-
+    [Header("Movement values")]
     private float startSpeed;
     public float StartSpeed
     {
@@ -18,16 +18,19 @@ public class projectileScript : MonoBehaviour
         }
     }
      private float speed;
-    public float damage;
-    public GameObject player;
     private Vector3 movement;
     public Vector3 Movement
     {
         set { movement = value; }
     }
-    public LayerMask layer;
     private float travelledDistance;
     private float maxDistance = 5.0f;
+    [Space]
+    [Header("Damage values")]
+    public float damage;
+    public GameObject player;
+    public LayerMask layer;
+    public Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,13 @@ public class projectileScript : MonoBehaviour
     { 
         if (collision.gameObject.tag == "Player")
         collision.gameObject.GetComponent<Player>().health -= damage;
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            collision.gameObject.GetComponent<Player>().health -= damage;
         Destroy(gameObject);
     }
 

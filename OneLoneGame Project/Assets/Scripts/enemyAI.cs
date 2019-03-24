@@ -59,15 +59,19 @@ public class enemyAI : MonoBehaviour
             isPlayerSeen = true;
             float now = Time.time;
             Debug.Log(now - last);
+            // пуск стрел
+            #region
             if (now - last > 2.0f)
             {
                 var arrow = Instantiate(arrowPrefab);
-                arrow.transform.position = (player.transform.position - transform.position).normalized + transform.position;
+                arrow.transform.position = (player.transform.position - transform.position).normalized*0.75f + transform.position;
                 arrow.GetComponent<projectileScript>().Movement = (player.transform.position - transform.position).normalized;
                 arrow.GetComponent<projectileScript>().StartSpeed = arrowStrenght;
                 last = now;
             }
-                movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
+            #endregion
+
+            movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
         }
         else
             isPlayerSeen = false;
