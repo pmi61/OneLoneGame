@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     Inventory inventory;
-    
+
     public Slider hungerUI;
     public Image hungerUIcolor;
     public Slider healthUI;
@@ -55,15 +55,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // facing = new Vector2(0, -1);
+        // facing = new Vector2(0, -1);
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
-        speed = startSpeed;           
+        speed = startSpeed;
     }
 
     // Update is called once per frame
     void Update()
-    { 
+    {
 
         if (!GameManager.instance.isGameRunning)
         {
@@ -103,7 +103,9 @@ public class Player : MonoBehaviour
         staminaUI.value = stamina;
         staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
 
-        Vector3 movement = new Vector3();
+        // Для определения направления движения
+        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
             GameManager.instance.OnESC();
@@ -152,11 +154,10 @@ public class Player : MonoBehaviour
                     stamina += staminaDelta / 4 * Time.deltaTime;
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    AttemptAttack(direct);
+                    AttemptAttack(movement);
                 }
             }
         }
-
 
         /* проверка на столкновение */
         Vector2 start = transform.position;
@@ -165,6 +166,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Linecast(start, end, layer);       // пускаем луч(а мб и нет) на MaskLayer layer, чтоб проверить на столкновение
         boxCollider.enabled = true;                                     // включаем обратно
 
+        // Для проверки работы инвентаря
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
@@ -184,22 +186,23 @@ public class Player : MonoBehaviour
                 inventory.PrintDebug();
             }
         }
-        
-            if (hit.transform == null) // если нет столкновения
+
+        if (hit.transform == null) // если нет столкновения
+        {
+            if (movement != Vector3.zero)
             {
                 animator.SetFloat("Horizontal", movement.x);
                 animator.SetFloat("Vertical", movement.y);
-                animator.SetFloat("Magnitude", movement.magnitude);
-
-                transform.position += movement.normalized * speed * Time.deltaTime;
             }
-            else
-            {
-                if (health > 0)
-                    health -= 10;
-            }
+            animator.SetFloat("Magnitude", movement.normalized.magnitude);
 
-       
+            transform.position += movement.normalized * speed * Time.deltaTime;
+        }
+        else
+        {
+            if (health > 0)
+                health -= 10;
+        }
     }
 
     public bool AttemptAdd(Item item)
@@ -214,7 +217,7 @@ public class Player : MonoBehaviour
         Vector2 size = boxCollider.size;
         //size += direction;
         Collider2D hit = Physics2D.OverlapCircle((Vector2)transform.position + directionRange, attackRadius);
-       // RaycastHit2D hit = Physics2D.BoxCast(origin, boxCollider.size * 2, 0, direction);
+        // RaycastHit2D hit = Physics2D.BoxCast(origin, boxCollider.size * 2, 0, direction);
         boxCollider.enabled = true;
         if (hit != null && hit.transform.tag == "Enemy")
             hit.GetComponent<enemyAI>().health -= 10;
