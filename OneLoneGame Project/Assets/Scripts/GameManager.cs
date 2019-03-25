@@ -25,18 +25,19 @@ class GameManager : MonoBehaviour
     {
         Debug.Log("GameManaer Awake");
 
-        //Check if instance already exists
+        // Проверяем существование instance
         if (instance == null)
         {
-            //if not, set instance to this
+            // Если не существует, инициализируем
             instance = this;
 
             Debug.Log("Create instance of GameManager");
         }
-        //If instance already exists and it's not this:
+        // Если instance уже существует, и он не ссылается на текущий экземпляр:
         else if (instance != this)
         {
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            // Унитожаем его. Это соответствует концепции синглетного класса,
+            // которая значит, что во всём приложении может быть только один экземпляр такого класса
             Destroy(gameObject);
 
             Debug.Log("Destroy another instance of GameManager");
@@ -71,7 +72,7 @@ class GameManager : MonoBehaviour
 
         isGameRunning = false;
         
-        //Disable this GameManager.
+        // Disable GameManager.
         enabled = false;
     }
 

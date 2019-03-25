@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// Расстояние, начиная с которого игрок пытается автоматически поднять предметы
+    /// </summary>
+    private const float ATTEMPT_ADD_ITEM_RADIUS = 1.0f;
+
     Inventory inventory;
     public Camera cam;
 
@@ -53,20 +58,21 @@ public class Player : MonoBehaviour
     private LifeIndicators LI;
 
     public GameObject arrowPrefab;
-    
-    
 
-    // Start is called before the first frame update
+
+
     void Start()
-    {       
+    {
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
         LI = GetComponent<LifeIndicators>();
-       LI.SetMaxValues(maxHealth, maxStamina, staminaDelta);
+        LI.SetMaxValues(maxHealth, maxStamina, staminaDelta);
+
+        // Создаём инвентарь на 5 слотов
+        inventory = new Inventory(5);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!GameManager.instance.isGameRunning)
@@ -74,7 +80,7 @@ public class Player : MonoBehaviour
             return;
         }
         // проверка жизненых показателей
-        #region
+        #region LifeCheck
         if (LI.Health <= 0)
         {
             GameManager.instance.GameOver();
@@ -92,11 +98,11 @@ public class Player : MonoBehaviour
         #endregion
 
         // обновление показателей интерфейса
-        #region
+        #region Interface
         hungerUI.value = hunger;
         hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
 
-        healthUI.value =LI.Health;
+        healthUI.value = LI.Health;
         healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
 
         staminaUI.value = LI.Stamina;
@@ -104,7 +110,7 @@ public class Player : MonoBehaviour
         #endregion
 
         // движение
-        #region
+        #region Movement
         Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
         if (movement != Vector3.zero)
         {
@@ -143,35 +149,34 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    pz.z = 0;                    
+                    pz.z = 0;
                     GetComponent<Attack>().AttemptToAttack(transform.position, (pz - transform.position).normalized);
                 }
                 else
-                    if(Input.GetKeyDown(KeyCode.Mouse1))
+                    if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                   GameObject arrow = Instantiate(arrowPrefab);
+                    GameObject arrow = Instantiate(arrowPrefab);
                     arrow.transform.position = transform.position + (pz - transform.position).normalized;
                     arrow.GetComponent<projectileScript>().Movement = (pz - transform.position).normalized;
                     arrow.GetComponent<projectileScript>().StartSpeed = 1;
                     arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
-
                 }
             }
         }
 
-        // работа инвентаря
-        #region
+        // Для отладки работы инвентаря
+        #region Inventory
         if (Input.GetKeyDown(KeyCode.Q))
         {
             inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
-            print("Current inventory index " + inventory.getCurrentIndex());
+            print("Current inventory index " + inventory.CurrentCellIndex);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             inventory.shiftCurrentIndex(Inventory.SHIFT_RIGHT);
-            print("Current inventory index " + inventory.getCurrentIndex());
+            print("Current inventory index " + inventory.CurrentCellIndex);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -182,12 +187,29 @@ public class Player : MonoBehaviour
                 inventory.PrintDebug();
             }
         }
+        AttemptAddItems();
         #endregion  
 
     }
 
-    public bool AttemptAdd(Item item)
+    /// <summary>
+    /// Функция, которая пытается добавить предметы рядом с игроком в инвентарь
+    /// </summary>
+    public void AttemptAddItems()
     {
-        return true;
+        Collider2D[] itemsToAdd = Physics2D.OverlapCircleAll(transform.position, ATTEMPT_ADD_ITEM_RADIUS, Item.layerMask);
+
+        Item item;
+        for (int i = 0; i < itemsToAdd.Length; i++)
+        {
+            item = itemsToAdd[i].transform.GetComponent<Item>();
+            Debug.Log("Item \"" + item.name + "\" was added");
+
+            if (inventory.AttemptAdd(item))
+            {
+                inventory.PrintDebug();
+                Destroy(item.gameObject);
+            }
+        }
     }
 }

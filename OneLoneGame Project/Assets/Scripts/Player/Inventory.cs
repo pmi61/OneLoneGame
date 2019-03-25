@@ -5,34 +5,90 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+/// <summary>
+/// Класс, в котором хранится заданное количество ячеек инвентаря
+/// </summary>
 public class Inventory
 {
+    /// <summary>
+    /// Код для сдвига текущей ячейки назад на одну позицию
+    /// </summary>
     public const int SHIFT_LEFT = -1;
+
+    /// <summary>
+    /// Код для сдвига текущей ячейки вперёд на одну позицию
+    /// </summary>
     public const int SHIFT_RIGHT = 1;
 
-    // Список ячеек инвентаря
+    /// <summary>
+    /// Список ячеек инвентаря
+    /// </summary>
+    /// <seealso cref="Inventory.Cell"/>
     private List<Cell> inventoryCells;
 
-    private int currentIndex = 0;
+    /// <summary>
+    /// Индекс текущей ячейки инвентаря
+    /// </summary>
+    private int currentCellIndex = 0;
 
-    // Количество ячеек
+    /// <summary>
+    /// Количество ячеек в инвентаре
+    /// </summary>    
     protected int cellNumber;
 
+    /// <summary>
+    /// Свойство для задания значения индекса текущей ячейки инвентаря
+    /// </summary>
+    public int CurrentCellIndex
+    {
+        get
+        {
+            return currentCellIndex;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                currentCellIndex = 0;
+            }
+            else if (value >= cellNumber)
+            {
+                currentCellIndex = cellNumber - 1;
+            }
+            else
+            {
+                currentCellIndex = value;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Конструктор класса
+    /// </summary>
+    /// <param name="cellNumber"> Количество ячеек в создаваемом инвентаре </param>
+    /// <seealso cref="Inventory.Cell"/>
     public Inventory(int cellNumber)
     {
         this.cellNumber = cellNumber;
         inventoryCells = new List<Cell>();
 
+        // Создаём пустые ячейки
         for (int i = 0; i < cellNumber; i++)
         {
             inventoryCells.Add(new Cell());
         }
     }
 
-    // Функция для добавления предмета в инвентарь
+    /// <summary>
+    ///  Функция для добавления предмета в инвентарь.
+    /// </summary>
+    /// <param name="item"> Предмет, который мы хотим добавить. </param>
+    /// <returns> Возвращает true, если добавить предмет получилось, иначе возвращает false</returns>
+    /// <remarks> Ищет либо ячейку с таким же предметом, либо пустую ячейку</remarks>
     public bool AttemptAdd(Item item)
     {
         // Индекс первой пустой ячейки в инвентаре
+        // -1 сигнализирует о том, что пустых ячеек нет
         int firstEmptyCellIndex = -1;
 
         for (int i = 0; i < cellNumber; i++)
@@ -42,9 +98,9 @@ public class Inventory
             {
                 // Если название предмета в текущей ячейке совпадает с названием добавляемого предмета
                 // И
-                // Если количество предметов в текущей ячейке меньше максимального
-                if (inventoryCells[i].item.Name == item.Name &&
-                    inventoryCells[i].number < item.MaxInInvintoryCell)
+                // Если количество предметов в текущей ячейке меньше максимального, т.е. есть место на ещё 1 такой же предмет
+                if (inventoryCells[i].item.name == item.name &&
+                    inventoryCells[i].number < item.maxInInventoryCell)
                 {
                     // Добавляем предмет, увеличивая количество предметов
                     inventoryCells[i].number++;
@@ -74,13 +130,20 @@ public class Inventory
         }
     }
 
-    // Функция, которая удаляет из инвенторя один элемент по текущему индексу
+    /// <summary>
+    /// Функция, которая удаляет из инвенторя один элемент по текущему индексу
+    /// </summary>
+    /// <returns> Возвращает удалённый предмет </returns>
     public Item removeOne()
     {
-        return removeOne(currentIndex);
+        return removeOne(currentCellIndex);
     }
 
-    // Функция, которая удаляет из инвентаря один элемент по указанному индексу
+    /// <summary>
+    /// Функция, которая удаляет из инвентаря один элемент по указанному индексу
+    /// </summary>
+    /// <param name="index"> Индекс ячейки, из которой удаляем предмет </param>
+    /// <returns> Возвращает удалённый предмет. Если ячейка была пустой, возвращает null </returns>
     public Item removeOne(int index)
     {
         if (inventoryCells[index].IsEmpty())
@@ -95,59 +158,42 @@ public class Inventory
         }
     }
 
-    public int getCurrentIndex()
-    {
-        return currentIndex;
-    }
-
-    // Функция для установки индекса текущей ячйки инвентаря
-    public void setCurrentIndex(int index)
-    {
-        if (index < 0)
-        {
-            currentIndex = 0;
-        }
-        else if (index >= cellNumber)
-        {
-            currentIndex = cellNumber - 1;
-        }
-        else
-        {
-            currentIndex = index;
-        }
-    }
-
-    // Функция для сдвига индекса текущей ячейки инвентаря
+    /// <summary>
+    /// Функция для сдвига индекса текущей ячейки инвентаря
+    /// </summary>
+    /// <param name="shiftDirection"> Велчина, на которую необходимо сдвинуть влево/вправо индекс текущей ячейки инвентаря</param>
     public void shiftCurrentIndex(int shiftDirection)
     {
         switch (shiftDirection)
         {
             case SHIFT_LEFT:
-                if (currentIndex == 0)
+                if (currentCellIndex == 0)
                 {
-                    currentIndex = cellNumber - 1;
+                    currentCellIndex = cellNumber - 1;
                 }
                 else
                 {
-                    currentIndex--;
+                    currentCellIndex--;
                 }
                 break;
 
             case SHIFT_RIGHT:
-                if (currentIndex == cellNumber - 1)
+                if (currentCellIndex == cellNumber - 1)
                 {
-                    currentIndex = 0;
+                    currentCellIndex = 0;
                 }
                 else
                 {
-                    currentIndex++;
+                    currentCellIndex++;
                 }
                 break;
         }
 
     }
 
-    // Вывод содержимого в окно отладки
+    /// <summary>
+    /// Вывод содержимого инвентаря в окно отладки
+    /// </summary>
     public void PrintDebug()
     {
         Debug.Log("Inventory contains:");
@@ -163,28 +209,40 @@ public class Inventory
             }
             else
             {
-                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].item.Name;
+                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].item.name;
             }
 
             Debug.Log(cellString);
         }
     }
 
-    // Ячейка инвентаря
+    /// <summary>
+    /// Вложенный класс с информацией о ячейке инвентаря
+    /// </summary>
     private class Cell
     {
-        // Количество предметов в ячейке
+        /// <summary>
+        /// Количество предметов в ячейке
+        /// </summary>
         public int number;
 
-        // Предмет в ячейке
+        /// <summary>
+        /// Предмет в ячейке
+        /// </summary>
         public Item item;
 
+        /// <summary>
+        /// Конструктор класса, устанавливает для ячейки значение, которое обозначает, что ячейка пустая
+        /// </summary>
         public Cell()
         {
             SetEmpty();
         }
 
-
+        /// <summary>
+        /// Проверяет, является ли ячейка пустой
+        /// </summary>
+        /// <returns> Возвращает true, если ячейка пустая, иначе false</returns>
         public bool IsEmpty()
         {
             if (number == 0)
@@ -197,6 +255,9 @@ public class Inventory
             }
         }
 
+        /// <summary>
+        ///  Функция, которая устанавливает ячейку пустой
+        /// </summary>
         public void SetEmpty()
         {
             number = 0;
