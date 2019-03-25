@@ -43,19 +43,17 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Attack properties")]
+    public GameObject arrowPrefab;
     public GameObject slashPrefab;
     public float attackRadius;
-    private Vector2 direct;
-    public LayerMask layer;
-    public Animator animator;
+    public float arrowStrength;
     public List<string> enemyTags;
 
+    public LayerMask layer;
+    public Animator animator;
+
     private LifeIndicators LI;
-
-    public GameObject arrowPrefab;
     
-    
-
     // Start is called before the first frame update
     void Start()
     {       
@@ -126,7 +124,6 @@ public class Player : MonoBehaviour
         {
             if (!GameManager.instance.IsInMenu)
             {
-
                 if (Input.GetKeyDown(KeyCode.LeftShift) && LI.Stamina > 33.0f)
                     speed = startSpeed * 2;
                 else
@@ -151,12 +148,7 @@ public class Player : MonoBehaviour
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                   GameObject arrow = Instantiate(arrowPrefab);
-                    arrow.transform.position = transform.position + (pz - transform.position).normalized;
-                    arrow.GetComponent<projectileScript>().Movement = (pz - transform.position).normalized;
-                    arrow.GetComponent<projectileScript>().StartSpeed = 1;
-                    arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
-
+                    GetComponent<Attack>().FireArrow(transform.position, pz, enemyTags, arrowStrength, arrowPrefab);
                 }
             }
         }

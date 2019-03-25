@@ -24,7 +24,7 @@ public class projectileScript : MonoBehaviour
         set { movement = value; }
     }
     private float travelledDistance;
-    private float maxDistance = 5.0f;
+    private float maxDistance = 15.0f;
     [Space]
     [Header("Damage values")]
     public float damage;

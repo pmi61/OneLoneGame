@@ -29,9 +29,8 @@ public class enemyAI : MonoBehaviour
 
     [Header("Fight attributes:")]
     public GameObject arrowPrefab;
-
     public float arrowStrenght;
-    private float last;
+    private float lastTimeOfAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +38,7 @@ public class enemyAI : MonoBehaviour
         speed = startSpeed;
         lastDirChange = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
-        last = Time.time;
+        lastTimeOfAttack = Time.time;
         LI = GetComponent<LifeIndicators>();
         LI.SetMaxValues(maxHealth, maxStamina, 10);
 }
@@ -61,10 +60,10 @@ public class enemyAI : MonoBehaviour
             float now = Time.time;
             // пуск стрел
             #region
-            if (now - last > 2.0f)
+            if (now - lastTimeOfAttack > 2.0f)
             {
                 FireArrow(nearestCreature);
-                last = now;
+                lastTimeOfAttack = now;
             }
             #endregion
             movement = new Vector3(nearestCreature.position.x - transform.position.x, nearestCreature.position.y - transform.position.y, 0).normalized;
