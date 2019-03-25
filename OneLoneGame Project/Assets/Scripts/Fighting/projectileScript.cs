@@ -28,7 +28,7 @@ public class projectileScript : MonoBehaviour
     [Space]
     [Header("Damage values")]
     public float damage;
-    public GameObject player;
+    public List<string> enemyTags;
     public LayerMask layer;
     public Rigidbody2D rb;
 
@@ -36,7 +36,9 @@ public class projectileScript : MonoBehaviour
     void Start()
     {
         travelledDistance = 0;
-        speed = StartSpeed;        
+        speed = StartSpeed;
+        float angle = Vector3.SignedAngle(new Vector2(1, 0), movement, new Vector3(0, 0, 1)) - 45 ;
+        transform.Rotate(0, 0, angle);
     }
 
     // Update is called once per frame
@@ -49,17 +51,21 @@ public class projectileScript : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    { 
-        if (collision.gameObject.tag == "Player")
-        collision.gameObject.GetComponent<LifeIndicators>().TakeDamage(damage);
-        Destroy(gameObject);
+    {
+        if (enemyTags.Contains(collision.gameObject.tag))
+        {
+            collision.gameObject.GetComponent<LifeIndicators>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (enemyTags.Contains(collision.gameObject.tag))
+        {
             collision.gameObject.GetComponent<LifeIndicators>().TakeDamage(damage);
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
 

@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 117049491}
   m_Layer: 9
   m_Name: "\u041F\u0440\u0435\u043F\u044F\u0442\u0441\u0442\u0432\u0438\u0435"
-  m_TagString: Untagged
+  m_TagString: Animals
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -460,7 +460,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -208.7, y: -207.8}
+  m_AnchoredPosition: {x: -204.19997, y: -191.2}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &142872458
@@ -2838,7 +2838,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0cfe7bd5ec607a44187971b13d9e2c57, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10098,7 +10098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -208.2, y: -157.6}
+  m_AnchoredPosition: {x: -203.7, y: -141}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &773570501
@@ -10646,6 +10646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6997f20a9d051346a77681055862712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 519420031}
   hungerUI: {fileID: 142872458}
   hungerUIcolor: {fileID: 2053789226}
   healthUI: {fileID: 773570501}
@@ -10655,6 +10656,9 @@ MonoBehaviour:
   rb: {fileID: 990563757}
   startSpeed: 3.5
   speed: 3.5
+  maxHealth: 100
+  maxStamina: 100
+  staminaDelta: 10
   hunger: 100
   hungerDelta: 5
   slashPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
@@ -10664,6 +10668,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   animator: {fileID: 990563756}
+  enemyTags:
+  - Enemy
+  arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
+    type: 3}
 --- !u!212 &990563754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10720,7 +10728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990563752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.122, y: -2.42, z: 0}
+  m_LocalPosition: {x: 4.92, y: -2.98, z: 0}
   m_LocalScale: {x: 5.0313, y: 2.4808, z: 1}
   m_Children:
   - {fileID: 519420032}
@@ -10840,7 +10848,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1024
-  animator: {fileID: 0}
 --- !u!114 &990563762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10853,6 +10860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d083841e39d61045bd167e9e0729529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: -5
 --- !u!1 &1012690632
 GameObject:
   m_ObjectHideFlags: 0
@@ -11949,7 +11957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -208.2, y: -179.80087}
+  m_AnchoredPosition: {x: -203.69997, y: -167.1}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372287037
@@ -12301,9 +12309,11 @@ GameObject:
   - component: {fileID: 1466261516}
   - component: {fileID: 1466261515}
   - component: {fileID: 1466261518}
+  - component: {fileID: 1466261522}
   - component: {fileID: 1466261519}
   - component: {fileID: 1466261520}
   - component: {fileID: 1466261521}
+  - component: {fileID: 1466261523}
   m_Layer: 10
   m_Name: monster_222
   m_TagString: Enemy
@@ -12433,24 +12443,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 1
-  movement: {x: 0, y: 0, z: 0}
-  startSpeed: 0
-  speed: 0
-  dirChange: 0
-  dir: 0
-  player: {fileID: 990563752}
+  startSpeed: 1
+  enemyTags:
+  - Player
+  - Animals
   aggroDistance: 10
-  health: 10
-  stamina: 50
+  maxHealth: 100
+  maxStamina: 100
   staminaDelta: 10
-  layer:
-    serializedVersion: 2
-    m_Bits: 0
   rb: {fileID: 1466261515}
   arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
     type: 3}
   arrowStrenght: 5
-  FoW: {fileID: 0}
 --- !u!114 &1466261520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12467,7 +12471,7 @@ MonoBehaviour:
   viewAngle: 360
   targetMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 5120
   obstacleMask:
     serializedVersion: 2
     m_Bits: 512
@@ -12479,12 +12483,56 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466261514}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c828017bcfb8c429fffaef8cbea22f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d083841e39d61045bd167e9e0729529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  health: 0
+--- !u!61 &1466261522
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466261514}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000000026077032, y: -0.000869073}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16949451, y: 0.18259455}
+  m_EdgeRadius: 0
+--- !u!114 &1466261523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466261514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5fa2494e85ae34a84917f20d1f687f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTags: []
+  attackEffectPrefab: {fileID: 0}
+  attackRadius: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1472223210
 GameObject:
   m_ObjectHideFlags: 0
@@ -12712,9 +12760,9 @@ GameObject:
   - component: {fileID: 1580196718}
   - component: {fileID: 1580196717}
   - component: {fileID: 1580196716}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: "\u041F\u0440\u0435\u043F\u044F\u0442\u0441\u0442\u0432\u0438\u0435 (1)"
-  m_TagString: Untagged
+  m_TagString: Animals
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12887,7 +12935,6 @@ GameObject:
   - component: {fileID: 1759296962}
   - component: {fileID: 1759296961}
   - component: {fileID: 1759296960}
-  - component: {fileID: 1759296963}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -12977,17 +13024,6 @@ Canvas:
   m_SortingLayerID: -843295963
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!210 &1759296963
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759296958}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &1767974219
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class LifeIndicators : MonoBehaviour
 {
     [Header("Health values:")]
     private float maxHealth;
-    private float health;
+   public  float health;
     public float Health
     {
         get

@@ -4,46 +4,44 @@ using UnityEngine;
 
 public class enemyAI : MonoBehaviour
 {
-    public float offset;
-    public Vector3 movement;
-    public float startSpeed;
-    public float speed;
-    public float dirChange; // время смены направления
-    public int dir;
-    public GameObject player;
-    public float aggroDistance;
-    private bool isPlayerSeen = false;
+    [Header("Movement values:")]
+    public float offset;        // расстояние, ближе которого не нужно приближаться к цели
+    private Vector3 movement;    // направление движения
+    public float startSpeed;     // начальная
+    private float speed;         // скорость текущая (под модификаторами)
+    private float lastDirChange; // время смены направления
+    private int dir;             // ролл направления
 
-    public float health;
-    public float Health
-    { set
-        {
-            health = Health;
-        }
-        get
-        { return health; }
-    }
-    public float stamina;
+    [Header("Enemies and their attributes:")]
+    public List<string> enemyTags;      // список тегом противников
+    public float aggroDistance;         // дистанция агра
+    private bool isEnemySeen = false;   // флаг, видит ли моб противника
+
+    [Header("Life attributes:")]
+    public float maxHealth;
+    public float maxStamina;
     public float staminaDelta;
-    public LayerMask layer;
+    private LifeIndicators LI;
 
+    [Header("BOdy attributes:")]
     public Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+
+    [Header("Fight attributes:")]
     public GameObject arrowPrefab;
 
     public float arrowStrenght;
     private float last;
 
-    public FieldOfView FoW;
-
     // Start is called before the first frame update
     void Start()
     {
-        FoW = GetComponent<FieldOfView>();
-        startSpeed = speed;
-        dirChange = Time.time;
+        speed = startSpeed;
+        lastDirChange = Time.time;
         boxCollider = GetComponent<BoxCollider2D>();
-        last = Time.time;    
+        last = Time.time;
+        LI = GetComponent<LifeIndicators>();
+        LI.SetMaxValues(maxHealth, maxStamina, 10);
 }
 
     // Update is called once per frame
@@ -51,30 +49,28 @@ public class enemyAI : MonoBehaviour
     {
         if (!GameManager.instance.isGameRunning)
             return;
-        if (health <= 0)
+        float distance = aggroDistance;
+        if (LI.Health <= 0)
             Destroy(gameObject);
-         float distance = Vector2.Distance(transform.position, player.transform.position);
-        if (FoW.visibleTargets.Contains(player.transform))
+        Transform nearestCreature = findClosestVisibleEnemy();
+
+        if (nearestCreature != null)
         {
-            isPlayerSeen = true;
+            distance = Vector2.Distance(nearestCreature.position, transform.position);
+            isEnemySeen = true;
             float now = Time.time;
-            Debug.Log(now - last);
             // пуск стрел
             #region
             if (now - last > 2.0f)
             {
-                var arrow = Instantiate(arrowPrefab);
-                arrow.transform.position = (player.transform.position - transform.position).normalized*0.75f + transform.position;
-                arrow.GetComponent<projectileScript>().Movement = (player.transform.position - transform.position).normalized;
-                arrow.GetComponent<projectileScript>().StartSpeed = arrowStrenght;
+                FireArrow(nearestCreature);
                 last = now;
             }
             #endregion
-
-            movement = new Vector3(player.transform.position.x - transform.position.x, player.transform.position.y - transform.position.y, 0).normalized;
+            movement = new Vector3(nearestCreature.position.x - transform.position.x, nearestCreature.position.y - transform.position.y, 0).normalized;
         }
         else
-            isPlayerSeen = false;
+            isEnemySeen = false;
         if (distance > offset)
             getMoveDir();
         else
@@ -82,14 +78,38 @@ public class enemyAI : MonoBehaviour
         rb.velocity = movement * speed;
     }
 
+    private Transform findClosestVisibleEnemy()
+    {
+        Transform nearestCreature = null;
+        if (GetComponent<FieldOfView>().visibleTargets.Count > 0)
+        {          
+            nearestCreature = GetComponent<FieldOfView>().visibleTargets[0];
+            float distance = Vector2.Distance(transform.position, nearestCreature.position);
+            foreach (Transform creature in GetComponent<FieldOfView>().visibleTargets)
+            {
+                if (creature != nearestCreature && distance > Vector2.Distance(transform.position, creature.position))
+                {
+                    nearestCreature = creature;
+                    distance = Vector2.Distance(transform.position, creature.position);
+                }
+            }
+        }
+        return nearestCreature;
+    }
+
+    private void FireArrow(Transform creature)
+    {
+        GetComponent<Attack>().FireArrow(transform.position, creature.position, enemyTags, arrowStrenght, arrowPrefab);
+    }
+
     void getMoveDir()
     {
-        if (!isPlayerSeen)
+        if (!isEnemySeen)
         {
         float now = Time.time;
-            if (now - dirChange > 1f) 
+            if (now - lastDirChange > 1f) 
             {
-                dirChange = Time.time;
+                lastDirChange = Time.time;
                 dir = Random.Range(0, 9);
                 switch (dir)
                 {

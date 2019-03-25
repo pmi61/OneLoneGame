@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     Inventory inventory;
+    public Camera cam;
 
     [Header("UI")]
     public Slider hungerUI;
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Life values")]
+    public float maxHealth;
+    public float maxStamina;
+    public float staminaDelta;
     public float hunger;
     public float Hunger
     {
@@ -44,8 +48,11 @@ public class Player : MonoBehaviour
     private Vector2 direct;
     public LayerMask layer;
     public Animator animator;
+    public List<string> enemyTags;
 
     private LifeIndicators LI;
+
+    public GameObject arrowPrefab;
     
     
 
@@ -56,7 +63,7 @@ public class Player : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
         LI = GetComponent<LifeIndicators>();
-       LI.SetMaxValues(100, 100, 10);
+       LI.SetMaxValues(maxHealth, maxStamina, staminaDelta);
     }
 
     // Update is called once per frame
@@ -126,29 +133,7 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyUp(KeyCode.LeftShift) || LI.Stamina < 0.0f)
                     speed = startSpeed;
                 else
-                if (Input.GetKey(KeyCode.W))
-                {
-                    movement.y = 1;
-                    direct = new Vector2(0.5f, 0);
-                }
-                else
-                if (Input.GetKey(KeyCode.A))
-                {
-                    direct = new Vector2(0.5f, 0);
-                    movement.x = -1;
-                }
-                else
-                if (Input.GetKey(KeyCode.S))
-                {
-                    movement.y = -1;
-                    direct = new Vector2(0.5f, 0);
-                }
-                else
-                if (Input.GetKey(KeyCode.D))
-                {
-                    movement.x = 1;
-                    direct = new Vector2(0.5f, 0);
-                }
+                    movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
                 if (LI.Stamina > -1 && speed != startSpeed)
                     LI.Run(Time.deltaTime);
@@ -157,7 +142,21 @@ public class Player : MonoBehaviour
                     LI.GainStamina(Time.deltaTime);
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    GetComponent<Attack>().AttemptToAttack(transform.position, new Vector2(Input.GetAxisRaw("Horizontal") , Input.GetAxisRaw("Vertical")));
+                    Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    pz.z = 0;                    
+                    GetComponent<Attack>().AttemptToAttack(transform.position, (pz - transform.position).normalized);
+                }
+                else
+                    if(Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    pz.z = 0;
+                   GameObject arrow = Instantiate(arrowPrefab);
+                    arrow.transform.position = transform.position + (pz - transform.position).normalized;
+                    arrow.GetComponent<projectileScript>().Movement = (pz - transform.position).normalized;
+                    arrow.GetComponent<projectileScript>().StartSpeed = 1;
+                    arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
+
                 }
             }
         }
