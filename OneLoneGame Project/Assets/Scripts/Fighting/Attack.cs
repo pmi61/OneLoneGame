@@ -15,7 +15,7 @@ public class Attack : MonoBehaviour
 
 
     /// <summary>
-    /// Функция-корутина для ожидания 0.2с и нанесения урона
+    /// Функция-корутина для ожидания 0.2 и нанесения урона
     /// </summary>
     /// <param name="origin"></param> место, откуда производится атака
     /// <param name="direction"></param> - направление атаки 
@@ -26,7 +26,7 @@ public class Attack : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapCircleAll(attack.transform.position, attackRadius, layer);
         foreach (Collider2D creature in hit)
             if (creature != null && enemyTags.Contains(creature.transform.tag))
-                creature.GetComponent<LifeIndicators>().TakeDamage(10);
+                creature.GetComponent<LifeIndicators>().TakeDamage(10); ;
     }
     /// <summary>
     /// Функция для попытки атаковать
@@ -41,20 +41,13 @@ public class Attack : MonoBehaviour
           attack.transform.Rotate(0,0,angle + 40);
         StartCoroutine(DealDamage(origin, direction));       
     }
-    /// <summary>
-    /// Функция выстрела снаряда arrowPrefab в направлении dst из origin
-    /// </summary>
-    /// <param name="origin" - место, откуда производится выстрел></param>
-    /// <param name="dst" - место, куда летит выстрел></param>
-    /// <param name="enemyTags" - теги, по которым будет определяться, будет ли нанесен урон></param>
-    /// <param name="startSpeed" - стартовая скорость полета стрелы></param>
-    /// <param name="arrowPrefab" - префаб снаряда></param>
+
     public void FireArrow(Vector2 origin, Vector2 dst, List<string> enemyTags, float startSpeed, GameObject arrowPrefab)
     {
         GameObject arrow = Instantiate(arrowPrefab);
         arrow.transform.position = origin + (dst - origin).normalized;
         arrow.GetComponent<projectileScript>().Movement = (dst - origin).normalized;
-        arrow.GetComponent<projectileScript>().StartSpeed = startSpeed;
+        arrow.GetComponent<projectileScript>().StartSpeed = 1;
         arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
     }
 }
