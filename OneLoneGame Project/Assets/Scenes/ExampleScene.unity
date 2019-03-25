@@ -10621,6 +10621,8 @@ GameObject:
   - component: {fileID: 990563754}
   - component: {fileID: 990563756}
   - component: {fileID: 990563753}
+  - component: {fileID: 990563761}
+  - component: {fileID: 990563762}
   - component: {fileID: 990563757}
   - component: {fileID: 990563760}
   - component: {fileID: 990563759}
@@ -10655,9 +10657,6 @@ MonoBehaviour:
   speed: 3.5
   hunger: 100
   hungerDelta: 5
-  health: 100
-  stamina: 100
-  staminaDelta: 30
   slashPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
     type: 3}
   attackRadius: 1
@@ -10821,6 +10820,39 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.18687353}
   m_EdgeRadius: 0
+--- !u!114 &990563761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990563752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5fa2494e85ae34a84917f20d1f687f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTags:
+  - Enemy
+  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
+    type: 3}
+  attackRadius: 0.2
+  layer:
+    serializedVersion: 2
+    m_Bits: 1024
+  animator: {fileID: 0}
+--- !u!114 &990563762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990563752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d083841e39d61045bd167e9e0729529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1012690632
 GameObject:
   m_ObjectHideFlags: 0
@@ -12395,15 +12427,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466261514}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba0974564b859074ab166c089aa890bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 1
   movement: {x: 0, y: 0, z: 0}
-  startSpeed: 3.5
-  speed: 2
+  startSpeed: 0
+  speed: 0
   dirChange: 0
   dir: 0
   player: {fileID: 990563752}

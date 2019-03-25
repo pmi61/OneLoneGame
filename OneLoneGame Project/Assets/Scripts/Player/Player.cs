@@ -36,20 +36,6 @@ public class Player : MonoBehaviour
         get { return hunger; }
     }
     public float hungerDelta;
-    public float health;
-    public float Health
-    {
-        set
-        {
-            health = value;
-        }
-        get
-        {
-            return health;
-        }
-    }
-    public float stamina;
-    public float staminaDelta;
 
     [Space]
     [Header("Attack properties")]
@@ -58,6 +44,8 @@ public class Player : MonoBehaviour
     private Vector2 direct;
     public LayerMask layer;
     public Animator animator;
+
+    private LifeIndicators LI;
     
     
 
@@ -67,6 +55,8 @@ public class Player : MonoBehaviour
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
+        LI = GetComponent<LifeIndicators>();
+       LI.SetMaxValues(100, 100, 10);
     }
 
     // Update is called once per frame
@@ -78,14 +68,14 @@ public class Player : MonoBehaviour
         }
         // проверка жизненых показателей
         #region
-        if (healthUI.value <= 0)
+        if (LI.Health <= 0)
         {
             GameManager.instance.GameOver();
         }
         if (hunger <= 0)
         {
             hungerUIcolor.enabled = false;
-            health -= 10 * Time.deltaTime;
+            LI.TakeDamage(10 * Time.deltaTime);
         }
         else
         {
@@ -99,10 +89,10 @@ public class Player : MonoBehaviour
         hungerUI.value = hunger;
         hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
 
-        healthUI.value = health;
+        healthUI.value =LI.Health;
         healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
 
-        staminaUI.value = stamina;
+        staminaUI.value = LI.Stamina;
         staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
         #endregion
 
@@ -119,7 +109,7 @@ public class Player : MonoBehaviour
         rb.velocity = movement.normalized * speed;
         #endregion
 
-        if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
+        if (Input.GetKeyDown(KeyCode.Escape) && LI.Health > 0)
         {
             GameManager.instance.OnESC();
             healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
@@ -130,10 +120,10 @@ public class Player : MonoBehaviour
             if (!GameManager.instance.IsInMenu)
             {
 
-                if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0f)
+                if (Input.GetKeyDown(KeyCode.LeftShift) && LI.Stamina > 33.0f)
                     speed = startSpeed * 2;
                 else
-                if (Input.GetKeyUp(KeyCode.LeftShift) || stamina < 0.0f)
+                if (Input.GetKeyUp(KeyCode.LeftShift) || LI.Stamina < 0.0f)
                     speed = startSpeed;
                 else
                 if (Input.GetKey(KeyCode.W))
@@ -160,19 +150,14 @@ public class Player : MonoBehaviour
                     direct = new Vector2(0.5f, 0);
                 }
 
-                if (stamina > -1 && speed != startSpeed)
-                    stamina -= staminaDelta * Time.deltaTime;
+                if (LI.Stamina > -1 && speed != startSpeed)
+                    LI.Run(Time.deltaTime);
                 else
-                if (stamina < 100)
-                    stamina += staminaDelta / 4 * Time.deltaTime;
+                if (LI.Stamina < 100)
+                    LI.GainStamina(Time.deltaTime);
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    GameObject tmp = Instantiate(slashPrefab);
-                    tmp.transform.position = transform.position + movement;
-                    tmp.GetComponent<SpriteRenderer>().flipX = true;
-                    tmp.GetComponent<SpriteRenderer>().flipY = true;
-
-                    AttemptAttack(direct);
+                    GetComponent<Attack>().AttemptToAttack(transform.position, new Vector2(Input.GetAxisRaw("Horizontal") , Input.GetAxisRaw("Vertical")));
                 }
             }
         }
@@ -205,18 +190,5 @@ public class Player : MonoBehaviour
     public bool AttemptAdd(Item item)
     {
         return true;
-    }
-
-    private void AttemptAttack(Vector2 direction)
-    {
-
-        Vector2 origin = (Vector2)transform.position + direction;
-        boxCollider.enabled = false;
-        Vector2 size = boxCollider.size;
-        Collider2D []hit = Physics2D.OverlapCircleAll((Vector2)transform.position + direction, attackRadius);
-        boxCollider.enabled = true;
-        foreach(Collider2D creature in hit)
-        if (creature != null && creature.transform.tag == "Enemy")
-            creature.GetComponent<enemyAI>().health -= 10;
     }
 }
