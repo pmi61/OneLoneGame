@@ -51,7 +51,10 @@ public class enemyAI : MonoBehaviour
             return;
         float distance = aggroDistance;
         if (LI.Health <= 0)
+        {
+            GetComponent<DeathScript>().OnDeath(transform.position);
             Destroy(gameObject);
+        }
         Transform nearestCreature = findClosestVisibleEnemy();
 
         if (nearestCreature != null)
