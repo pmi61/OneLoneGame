@@ -78,14 +78,7 @@ class GameManager : MonoBehaviour
 
     public void OnESC()
     {
-        if (isInMenu)
-        {
-            menus.transform.Find("ESCMenu").gameObject.SetActive(false);
-        }
-        else
-        {           
-            menus.transform.Find("ESCMenu").gameObject.SetActive(true);
-        }
+        menus.transform.Find("ESCMenu").gameObject.SetActive(!isInMenu);
         isInMenu = !isInMenu;
         menus.GetComponent<Canvas>().enabled = !menus.GetComponent<Canvas>().enabled;
     }
