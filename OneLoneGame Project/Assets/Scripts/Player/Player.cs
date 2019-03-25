@@ -71,48 +71,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        // проверка жизненых показателей
-        #region
-        if (LI.Health <= 0)
-        {
-            GameManager.instance.GameOver();
-        }
-        if (hunger <= 0)
-        {
-            hungerUIcolor.enabled = false;
-            LI.TakeDamage(10 * Time.deltaTime);
-        }
-        else
-        {
-            hungerUIcolor.enabled = true;
-            hunger -= hungerDelta * Time.deltaTime;
-        }
-        #endregion
 
-        // обновление показателей интерфейса
-        #region
-        hungerUI.value = hunger;
-        hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
-
-        healthUI.value =LI.Health;
-        healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
-
-        staminaUI.value = LI.Stamina;
-        staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
-        #endregion
-
-        // движение
-        #region
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-        if (movement != Vector3.zero)
-        {
-            animator.SetFloat("Horizontal", movement.x);
-            animator.SetFloat("Vertical", movement.y);
-
-        }
-        animator.SetFloat("Magnitude", movement.normalized.magnitude);
-        rb.velocity = movement.normalized * speed;
-        #endregion
 
         if (Input.GetKeyDown(KeyCode.Escape) && LI.Health > 0)
         {
@@ -129,8 +88,7 @@ public class Player : MonoBehaviour
                 else
                 if (Input.GetKeyUp(KeyCode.LeftShift) || LI.Stamina < 0.0f)
                     speed = startSpeed;
-                else
-                    movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+
 
                 if (LI.Stamina > -1 && speed != startSpeed)
                     LI.Run(Time.deltaTime);
@@ -140,11 +98,11 @@ public class Player : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    pz.z = 0;                    
+                    pz.z = 0;
                     GetComponent<Attack>().AttemptToAttack(transform.position, (pz - transform.position).normalized);
                 }
                 else
-                    if(Input.GetKeyDown(KeyCode.Mouse1))
+                    if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
@@ -152,6 +110,58 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        // проверка жизненых показателей
+        if (!GameManager.instance.IsInMenu)
+        {
+            #region
+            if (LI.Health <= 0)
+            {
+                GameManager.instance.GameOver();
+            }
+            if (hunger <= 0)
+            {
+                hungerUIcolor.enabled = false;
+                LI.TakeDamage(10 * Time.deltaTime);
+            }
+            else
+            {
+                hungerUIcolor.enabled = true;
+                hunger -= hungerDelta * Time.deltaTime;
+            }
+            #endregion
+        }
+
+        // обновление показателей интерфейса
+        #region
+        hungerUI.value = hunger;
+        hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
+
+        healthUI.value = LI.Health;
+        healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
+
+        staminaUI.value = LI.Stamina;
+        staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
+        #endregion
+
+        // движение
+        if (!GameManager.instance.IsInMenu)
+        {
+            #region
+
+            Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+            if (movement != Vector3.zero)
+            {
+                animator.SetFloat("Horizontal", movement.x);
+                animator.SetFloat("Vertical", movement.y);
+
+            }
+            animator.SetFloat("Magnitude", movement.normalized.magnitude);
+            rb.velocity = movement.normalized * speed;
+
+            #endregion
+        }
+
+       
 
         // работа инвентаря
         #region

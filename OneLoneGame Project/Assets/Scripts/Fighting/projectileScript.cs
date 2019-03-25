@@ -44,6 +44,10 @@ public class projectileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.instance.isGameRunning || GameManager.instance.IsInMenu)
+        {
+            return;
+        }
         travelledDistance += speed * Time.deltaTime;
         transform.position += movement * speed * Time.deltaTime;        
         if (travelledDistance > maxDistance)
