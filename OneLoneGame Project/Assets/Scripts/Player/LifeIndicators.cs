@@ -40,27 +40,53 @@ public class LifeIndicators : MonoBehaviour
         stamina = maxStamina;
         isSet = true;
     }
-
+    /// <summary>
+    /// Получение урона
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <returns></returns>
     public float TakeDamage(float damage)
     {
         return health -= damage;
     }
-
+    /// <summary>
+    /// Получение лечения
+    /// </summary>
+    /// <param name="heal"></param>
+    /// <returns></returns>
     public float GainHealth(float heal)
     {
-        return health += heal;
+        health += heal;
+        if (health > maxHealth)
+            health = maxHealth;
+        return health;
     }
-
+    /// <summary>
+    /// Трата стамины не 
+    /// </summary>
+    /// <param name="staminaUsed"></param>
+    /// <returns></returns>
     public float StaminaDrain(float staminaUsed)
     {
         return stamina -= staminaUsed;
     }
-
+    /// <summary>
+    /// Трата стамины от прошедшего времени
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
     public float Run(float time)
     {
-        return stamina -= staminaDelta * time;
+        stamina -= staminaDelta * time;
+            if (stamina < 0)
+                stamina = 0;
+        return stamina;
     }
-
+    /// <summary>
+    /// Получение стамины от событий (не бега)
+    /// </summary>
+    /// <param name="staminaGain"></param>
+    /// <returns></returns>
     public float GainStamina(float staminaGain)
     {
         stamina += staminaGain;
@@ -68,10 +94,17 @@ public class LifeIndicators : MonoBehaviour
             stamina = maxStamina;
         return stamina;
     }
-
+    /// <summary>
+    /// Естественное восстановление стамины по времени
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
     public float StaminaRecover(float time)
     {
-        return stamina += staminaDelta / 2.0f * time;
+        stamina += staminaDelta / 2.0f * time;
+        if (stamina > maxStamina)
+            stamina = maxStamina;
+        return stamina; ;
     }
 
 

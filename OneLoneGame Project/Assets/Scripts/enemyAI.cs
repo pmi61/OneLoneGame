@@ -47,7 +47,7 @@ public class enemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isGameRunning)
+        if (!GameManager.instance.isGameRunning || GameManager.instance.IsInMenu)
             return;
         float distance = aggroDistance;
         if (LI.Health <= 0)

@@ -11006,8 +11006,12 @@ MonoBehaviour:
   staminaDelta: 10
   hunger: 100
   hungerDelta: 5
+  arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
+    type: 3}
   slashPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
     type: 3}
+  arrowStrength: 10
+  slashDamage: 10
   attackRadius: 1
   layer:
     serializedVersion: 2
@@ -11015,8 +11019,6 @@ MonoBehaviour:
   animator: {fileID: 990563756}
   enemyTags:
   - Enemy
-  arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
-    type: 3}
 --- !u!212 &990563754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11190,6 +11192,7 @@ MonoBehaviour:
   attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
     type: 3}
   attackRadius: 0.2
+  damage: 0
   layer:
     serializedVersion: 2
     m_Bits: 1024
@@ -12875,6 +12878,7 @@ MonoBehaviour:
   enemyTags: []
   attackEffectPrefab: {fileID: 0}
   attackRadius: 0
+  damage: 0
   layer:
     serializedVersion: 2
     m_Bits: 0

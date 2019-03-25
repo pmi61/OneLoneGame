@@ -48,7 +48,10 @@ public class Player : MonoBehaviour
 
     [Space]
     [Header("Attack properties")]
+    public GameObject arrowPrefab;
     public GameObject slashPrefab;
+    public float arrowStrength;
+    public float slashDamage;
     public float attackRadius;
     private Vector2 direct;
     public LayerMask layer;
@@ -56,11 +59,6 @@ public class Player : MonoBehaviour
     public List<string> enemyTags;
 
     private LifeIndicators LI;
-
-    public GameObject arrowPrefab;
-
-
-
     void Start()
     {
         //Get a component reference to this object's BoxCollider2D
@@ -79,49 +77,77 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        Vector3 movement;
         // проверка жизненых показателей
-        #region LifeCheck
-        if (LI.Health <= 0)
+        if (!GameManager.instance.IsInMenu)
         {
-            GameManager.instance.GameOver();
+            #region LifeCheck
+            if (LI.Health <= 0)
+            {
+                GameManager.instance.GameOver();
+            }
+            if (hunger <= 0)
+            {
+                hungerUIcolor.enabled = false;
+                LI.TakeDamage(10 * Time.deltaTime);
+            }
+            else
+            {
+                hungerUIcolor.enabled = true;
+                hunger -= hungerDelta * Time.deltaTime;
+            }
+            #endregion
+
+            // обновление показателей интерфейса
+            #region Interface
+            hungerUI.value = hunger;
+            hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
+
+            healthUI.value = LI.Health;
+            healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
+
+            staminaUI.value = LI.Stamina;
+            staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
+            #endregion
+
+            // движение
+            #region Movement
+            movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+            if (movement != Vector3.zero)
+            {
+                animator.SetFloat("Horizontal", movement.x);
+                animator.SetFloat("Vertical", movement.y);
+
+            }
+            animator.SetFloat("Magnitude", movement.normalized.magnitude);
+            rb.velocity = movement.normalized * speed;
+            #endregion
+
+            // Для отладки работы инвентаря
+            #region Inventory
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
+                print("Current inventory index " + inventory.CurrentCellIndex);
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                inventory.shiftCurrentIndex(Inventory.SHIFT_RIGHT);
+                print("Current inventory index " + inventory.CurrentCellIndex);
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Item item = inventory.removeOne();
+                if (item != null)
+                {
+
+                    inventory.PrintDebug();
+                }
+            }
+            AttemptAddItems();
+            #endregion
+
         }
-        if (hunger <= 0)
-        {
-            hungerUIcolor.enabled = false;
-            LI.TakeDamage(10 * Time.deltaTime);
-        }
-        else
-        {
-            hungerUIcolor.enabled = true;
-            hunger -= hungerDelta * Time.deltaTime;
-        }
-        #endregion
-
-        // обновление показателей интерфейса
-        #region Interface
-        hungerUI.value = hunger;
-        hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
-
-        healthUI.value = LI.Health;
-        healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
-
-        staminaUI.value = LI.Stamina;
-        staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
-        #endregion
-
-        // движение
-        #region Movement
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-        if (movement != Vector3.zero)
-        {
-            animator.SetFloat("Horizontal", movement.x);
-            animator.SetFloat("Vertical", movement.y);
-
-        }
-        animator.SetFloat("Magnitude", movement.normalized.magnitude);
-        rb.velocity = movement.normalized * speed;
-        #endregion
-
         if (Input.GetKeyDown(KeyCode.Escape) && LI.Health > 0)
         {
             GameManager.instance.OnESC();
@@ -132,7 +158,7 @@ public class Player : MonoBehaviour
         {
             if (!GameManager.instance.IsInMenu)
             {
-
+                #region stamina
                 if (Input.GetKeyDown(KeyCode.LeftShift) && LI.Stamina > 33.0f)
                     speed = startSpeed * 2;
                 else
@@ -146,6 +172,7 @@ public class Player : MonoBehaviour
                 else
                 if (LI.Stamina < 100)
                     LI.GainStamina(Time.deltaTime);
+                #endregion
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -157,38 +184,11 @@ public class Player : MonoBehaviour
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                    GameObject arrow = Instantiate(arrowPrefab);
-                    arrow.transform.position = transform.position + (pz - transform.position).normalized;
-                    arrow.GetComponent<projectileScript>().Movement = (pz - transform.position).normalized;
-                    arrow.GetComponent<projectileScript>().StartSpeed = 1;
-                    arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
+                    GetComponent<Attack>().FireArrow(transform.position, pz, enemyTags, arrowStrength, arrowPrefab);
                 }
             }
         }
-
-        // Для отладки работы инвентаря
-        #region Inventory
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
-            print("Current inventory index " + inventory.CurrentCellIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            inventory.shiftCurrentIndex(Inventory.SHIFT_RIGHT);
-            print("Current inventory index " + inventory.CurrentCellIndex);
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Item item = inventory.removeOne();
-            if (item != null)
-            {
-
-                inventory.PrintDebug();
-            }
-        }
-        AttemptAddItems();
-        #endregion  
+        
 
     }
 

@@ -44,19 +44,19 @@ public class projectileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        travelledDistance += speed * Time.deltaTime;
-        transform.position += movement * speed * Time.deltaTime;        
-        if (travelledDistance > maxDistance)
-            Destroy(gameObject);
+        if (!GameManager.instance.IsInMenu)
+        {
+            travelledDistance += speed * Time.deltaTime;
+            transform.position += movement * speed * Time.deltaTime;
+            if (travelledDistance > maxDistance)
+                Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (enemyTags.Contains(collision.gameObject.tag))
-        {
-            collision.gameObject.GetComponent<LifeIndicators>().TakeDamage(damage);
+      
             Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
