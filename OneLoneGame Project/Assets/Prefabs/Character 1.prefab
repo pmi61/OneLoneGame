@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1623455275
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b93541b045411b4cbc9db6bb69f1396, type: 3}
+  m_Sprite: {fileID: 21300014, guid: b8081d4c60a4e614ab4721e8f2ac2958, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,11 +115,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6997f20a9d051346a77681055862712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  hungerUI: {fileID: 0}
+  hungerUIcolor: {fileID: 0}
+  healthUI: {fileID: 0}
+  healthUIcolor: {fileID: 0}
+  staminaUI: {fileID: 0}
+  staminaUIcolor: {fileID: 0}
+  rb: {fileID: 0}
+  startSpeed: 0
   speed: 5
+  maxHealth: 0
+  maxStamina: 0
+  staminaDelta: 0
+  hunger: 0
+  hungerDelta: 0
+  slashPrefab: {fileID: 0}
+  attackRadius: 0
   layer:
     serializedVersion: 2
     m_Bits: 1024
   animator: {fileID: 4428368735517191868}
+  enemyTags: []
+  arrowPrefab: {fileID: 0}
 --- !u!50 &4428368735517191869
 Rigidbody2D:
   serializedVersion: 4
