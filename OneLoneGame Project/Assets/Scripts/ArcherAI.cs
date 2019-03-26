@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyAI : MonoBehaviour
+public class ArcherAI : MonoBehaviour
 {
     [Header("Movement values:")]
     public float offset;        // расстояние, ближе которого не нужно приближаться к цели
@@ -62,22 +62,19 @@ public class enemyAI : MonoBehaviour
             distance = Vector2.Distance(nearestCreature.position, transform.position);
             isEnemySeen = true;
             float now = Time.time;
-            // атака
+            // пуск стрел
             #region
             if (now - last > 2.0f)
             {
-                TryToAttack(nearestCreature);
+               
+               FireArrow(nearestCreature);
                 last = now;
             }
             #endregion
-            movement = new Vector3(nearestCreature.position.x - transform.position.x, nearestCreature.position.y - transform.position.y, 0).normalized;
+            movement = new Vector3(transform.position.x - nearestCreature.position.x, transform.position.y - nearestCreature.position.y, 0).normalized;
         }
         else
             isEnemySeen = false;
-        if (distance > offset)
-            getMoveDir();
-        else
-            movement = new Vector3(0, 0, 0);
         rb.velocity = movement * speed;
     }
 
@@ -104,10 +101,9 @@ public class enemyAI : MonoBehaviour
     {
         GetComponent<Attack>().FireArrow(transform.position, creature.position, enemyTags, arrowStrenght, arrowPrefab);
     }
-
     private void TryToAttack(Transform creature)
     {
-        GetComponent<Attack>().AttemptToAttack(transform.position, (creature.position - transform.position).normalized, enemyTags);
+        GetComponent<Attack>().AttemptToAttack(transform.position, creature.position, enemyTags);
     }
 
     void getMoveDir()

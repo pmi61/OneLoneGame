@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                    GetComponent<Attack>().AttemptToAttack(transform.position, (pz - transform.position).normalized);
+                    GetComponent<Attack>().AttemptToAttack(transform.position, (pz - transform.position).normalized, enemyTags);
                 }
                 else
                     if (Input.GetKeyDown(KeyCode.Mouse1))

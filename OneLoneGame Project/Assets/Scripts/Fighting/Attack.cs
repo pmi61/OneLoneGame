@@ -5,7 +5,7 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [Header("Enemy tags:")]
-    public List<string> enemyTags;
+    private List<string> enemyTags;
     [Header("Attack properties")]
     public GameObject attackEffectPrefab;
     public float attackRadius;
@@ -23,7 +23,7 @@ public class Attack : MonoBehaviour
     /// Также <param name="enemyAI"></param> нужно изменить на тот скрипт, который отвечает за хп (LifeIndicators?)
     IEnumerator DealDamage(Vector2 origin, Vector2 direction)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         Collider2D[] hit = Physics2D.OverlapCircleAll(attack.transform.position, attackRadius, layer);
         foreach (Collider2D creature in hit)
             if (creature != null && enemyTags.Contains(creature.transform.tag))
@@ -34,10 +34,11 @@ public class Attack : MonoBehaviour
     /// </summary>
     /// <param name="origin"></param> - место, откуда производится атака
     /// <param name="direction"></param> - направление атаки 
-    public void AttemptToAttack(Vector2 origin, Vector2 direction)
+    public void AttemptToAttack(Vector2 origin, Vector2 direction, List<string> enemyTags)
     {
+        this.enemyTags = enemyTags;
         attack = Instantiate(attackEffectPrefab);
-        attack.transform.position = origin + direction*1.5f;
+        attack.transform.position = origin + direction;
         float angle = Vector3.SignedAngle(new Vector2(1, 0), (Vector2)attack.transform.position - origin, new Vector3(0,0,1));
           attack.transform.Rotate(0,0,angle + 40);
         StartCoroutine(DealDamage(origin, direction));       

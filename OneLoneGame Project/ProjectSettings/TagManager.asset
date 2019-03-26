@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Projectile
   - Animals
+  - Archers
   layers:
   - Default
   - TransparentFX
