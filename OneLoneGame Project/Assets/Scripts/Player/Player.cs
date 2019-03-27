@@ -153,12 +153,10 @@ public class Player : Entity
                 }
             }
         }
-<<<<<<< HEAD
-=======
+
         #endregion
 
 
->>>>>>> OOP-ROFLANEBALO
     }
 
     /// <summary>
