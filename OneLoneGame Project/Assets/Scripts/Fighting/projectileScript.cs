@@ -63,7 +63,7 @@ public class projectileScript : MonoBehaviour
     {
         if (enemyTags.Contains(collision.gameObject.tag))
         {
-            collision.gameObject.GetComponent<Entity>().TakeDamage(damage);
+            collision.gameObject.GetComponent<LifeIndicators>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }
