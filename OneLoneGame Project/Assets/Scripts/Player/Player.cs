@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     /// <summary>
     /// Расстояние, начиная с которого игрок пытается автоматически поднять предметы
@@ -16,7 +17,6 @@ public class Player : MonoBehaviour
     private const float DROP_ITEM_RADIUS = 1.8f;
 
     Inventory inventory;
-    public Camera cam;
 
     [Header("UI")]
     public Slider hungerUI;
@@ -26,52 +26,17 @@ public class Player : MonoBehaviour
     public Slider staminaUI;
     public Image staminaUIcolor;
 
-    [Space]
-    [Header("Movement properties")]
-    public Rigidbody2D rb;
-    private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
-    public float startSpeed;
-    public float speed;
-    public float Speed
-    {
-        set { speed = value; }
-        get { return speed; }
-    }
+    [Header("Hunger:")]
+    [SerializeField] protected float hunger;
+    [SerializeField] protected float hungerDelta;
+    [SerializeField] protected float hungerDamage;
 
-    [Space]
-    [Header("Life values")]
-    public float maxHealth;
-    public float maxStamina;
-    public float staminaDelta;
-    public float hunger;
-    public float Hunger
-    {
-        set { hunger = value; }
-        get { return hunger; }
-    }
-    public float hungerDelta;
-
-    [Space]
-    [Header("Attack properties")]
-    public GameObject arrowPrefab;
-    public GameObject slashPrefab;
-    public float arrowStrength;
-    public float slashDamage;
-    public float attackRadius;
-    private Vector2 direct;
-    public LayerMask layer;
-    public Animator animator;
-    public List<string> enemyTags;
-
-    private LifeIndicators LI;
     void Start()
     {
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
-        LI = GetComponent<LifeIndicators>();
-        LI.SetMaxValues(maxHealth, maxStamina, staminaDelta);
-
+        SetMaxValues(maxHealth, maxStamina, staminaDelta);
         // Создаём инвентарь на 5 слотов
         inventory = new Inventory(5);
     }
@@ -82,19 +47,19 @@ public class Player : MonoBehaviour
         {
             return;
         }
-        Vector3 movement;
         // проверка жизненых показателей
         if (!GameManager.instance.IsInMenu)
         {
             #region LifeCheck
-            if (LI.Health <= 0)
+            if (health <= 0)
             {
                 GameManager.instance.GameOver();
+                return;
             }
             if (hunger <= 0)
             {
                 hungerUIcolor.enabled = false;
-                LI.TakeDamage(10 * Time.deltaTime);
+                TakeDamage(hungerDamage * Time.deltaTime);
             }
             else
             {
@@ -108,10 +73,10 @@ public class Player : MonoBehaviour
             hungerUI.value = hunger;
             hungerUIcolor.color = Color.Lerp(Color.black, Color.yellow, hungerUI.value / hungerUI.maxValue);
 
-            healthUI.value = LI.Health;
+            healthUI.value = health;
             healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
 
-            staminaUI.value = LI.Stamina;
+            staminaUI.value =stamina;
             staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
             #endregion
 
@@ -122,7 +87,6 @@ public class Player : MonoBehaviour
             {
                 animator.SetFloat("Horizontal", movement.x);
                 animator.SetFloat("Vertical", movement.y);
-
             }
             animator.SetFloat("Magnitude", movement.normalized.magnitude);
             rb.velocity = movement.normalized * speed;
@@ -148,7 +112,8 @@ public class Player : MonoBehaviour
             #endregion
 
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && LI.Health > 0)
+        #region Input
+        if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
             GameManager.instance.OnESC();
             healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
@@ -159,35 +124,41 @@ public class Player : MonoBehaviour
             if (!GameManager.instance.IsInMenu)
             {
                 #region stamina
-                if (Input.GetKeyDown(KeyCode.LeftShift) && LI.Stamina > 33.0f)
+                if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0f)
                     speed = startSpeed * 2;
                 else
-                if (Input.GetKeyUp(KeyCode.LeftShift) || LI.Stamina < 0.0f)
+                if (Input.GetKeyUp(KeyCode.LeftShift) || stamina < 0.0f)
                     speed = startSpeed;
                 else
                     movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-                if (LI.Stamina > -1 && speed != startSpeed)
-                    LI.Run(Time.deltaTime);
+                if (stamina > -1 && speed != startSpeed)
+                    Run(Time.deltaTime);
                 else
-                if (LI.Stamina < 100)
-                    LI.GainStamina(Time.deltaTime);
+                if (stamina < 100)
+                    GainStamina(Time.deltaTime);
                 #endregion
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                    GetComponent<Attack>().AttemptToAttack(transform.position, (pz - transform.position).normalized, enemyTags);
+                    AttemptToAttack(transform.position, (pz - transform.position));
                 }
                 else
                     if (Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                    GetComponent<Attack>().FireArrow(transform.position, pz, enemyTags, arrowStrength, arrowPrefab);
+                   FireArrow(transform.position, pz);
                 }
             }
         }
+<<<<<<< HEAD
+=======
+        #endregion
+
+
+>>>>>>> OOP-ROFLANEBALO
     }
 
     /// <summary>
