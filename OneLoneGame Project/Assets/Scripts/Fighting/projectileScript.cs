@@ -17,7 +17,7 @@ public class projectileScript : MonoBehaviour
             return startSpeed;
         }
     }
-    private float speed;
+     private float speed;
     private Vector3 movement;
     public Vector3 Movement
     {
