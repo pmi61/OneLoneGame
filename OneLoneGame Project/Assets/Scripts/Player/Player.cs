@@ -149,16 +149,14 @@ public class Player : Entity
                 {
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                   FireArrow(transform.position, pz);
+                    FireArrow(transform.position, pz);
                 }
             }
         }
-<<<<<<< HEAD
-=======
         #endregion
 
 
->>>>>>> OOP-ROFLANEBALO
+
     }
 
     /// <summary>
