@@ -8,7 +8,12 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Расстояние, начиная с которого игрок пытается автоматически поднять предметы
     /// </summary>
-    private const float ATTEMPT_ADD_ITEM_RADIUS = 1.0f;
+    private const float ATTEMPT_ADD_ITEM_RADIUS = 0.6f;
+
+    /// <summary>
+    /// Расстояние, на которое предмет отлетает от игрока при выбрасывании
+    /// </summary>
+    private const float DROP_ITEM_RADIUS = 1.8f;
 
     Inventory inventory;
     public Camera cam;
@@ -127,22 +132,17 @@ public class Player : MonoBehaviour
             #region Inventory
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                inventory.shiftCurrentIndex(Inventory.SHIFT_LEFT);
+                inventory.ShiftCurrentIndex(Inventory.SHIFT_LEFT);
                 print("Current inventory index " + inventory.CurrentCellIndex);
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
-                inventory.shiftCurrentIndex(Inventory.SHIFT_RIGHT);
+                inventory.ShiftCurrentIndex(Inventory.SHIFT_RIGHT);
                 print("Current inventory index " + inventory.CurrentCellIndex);
             }
-            else if (Input.GetKeyDown(KeyCode.Space))
+            else if (Input.GetKeyDown(KeyCode.X))
             {
-                Item item = inventory.removeOne();
-                if (item != null)
-                {
-
-                    inventory.PrintDebug();
-                }
+                DropItem();
             }
             AttemptAddItems();
             #endregion
@@ -188,8 +188,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        
-
     }
 
     /// <summary>
@@ -203,13 +201,42 @@ public class Player : MonoBehaviour
         for (int i = 0; i < itemsToAdd.Length; i++)
         {
             item = itemsToAdd[i].transform.GetComponent<Item>();
-            Debug.Log("Item \"" + item.name + "\" was added");
 
             if (inventory.AttemptAdd(item))
             {
+                Debug.Log("Item \"" + item.name + "\" was added");
                 inventory.PrintDebug();
                 Destroy(item.gameObject);
             }
+        }
+    }
+
+    /// <summary>
+    /// Функция, которая пытается извлечь предмет из текущей ячейки инвентаря и,
+    /// если получилось, выбрасывает предмет
+    /// </summary>
+    public void DropItem()
+    {
+        // Достаём предмет из текущей ячейки инвентаря
+        GameObject item = inventory.RemoveOne();
+
+        // Если ячейка не пустая
+        if (item != null)
+        {
+            // Определяем положение для повления предмета
+            Vector2 offset = new Vector2(animator.GetFloat("Horizontal") * DROP_ITEM_RADIUS,
+                                         animator.GetFloat("Vertical") * DROP_ITEM_RADIUS);
+
+            Vector3 dropPosition = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, 0);
+
+            inventory.PrintDebug();
+
+            // Создаём предмет
+            Instantiate(item.gameObject, dropPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("Current inventory cell is empty!");
         }
     }
 }

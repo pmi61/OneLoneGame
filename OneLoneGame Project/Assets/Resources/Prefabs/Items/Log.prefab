@@ -10,7 +10,27 @@ PrefabInstance:
     - target: {fileID: 7112139539894314366, guid: 759e1af9878a67d4db919a5f6fd65748,
         type: 3}
       propertyPath: m_Name
-      value: Log Variant
+      value: Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112139539894314366, guid: 759e1af9878a67d4db919a5f6fd65748,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 886512388638830994, guid: 759e1af9878a67d4db919a5f6fd65748,
+        type: 3}
+      propertyPath: name
+      value: Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 886512388638830994, guid: 759e1af9878a67d4db919a5f6fd65748,
+        type: 3}
+      propertyPath: description
+      value: Some log
+      objectReference: {fileID: 0}
+    - target: {fileID: 886512388638830994, guid: 759e1af9878a67d4db919a5f6fd65748,
+        type: 3}
+      propertyPath: maxInInventoryCell
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7112139539894314364, guid: 759e1af9878a67d4db919a5f6fd65748,
         type: 3}
@@ -77,21 +97,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 886512388638830994, guid: 759e1af9878a67d4db919a5f6fd65748,
-        type: 3}
-      propertyPath: name
-      value: Log
-      objectReference: {fileID: 0}
-    - target: {fileID: 886512388638830994, guid: 759e1af9878a67d4db919a5f6fd65748,
-        type: 3}
-      propertyPath: description
-      value: Some log
-      objectReference: {fileID: 0}
-    - target: {fileID: 886512388638830994, guid: 759e1af9878a67d4db919a5f6fd65748,
-        type: 3}
-      propertyPath: maxInInventoryCell
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8099757701248313914, guid: 759e1af9878a67d4db919a5f6fd65748,
         type: 3}

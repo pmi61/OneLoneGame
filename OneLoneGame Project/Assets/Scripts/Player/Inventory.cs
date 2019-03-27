@@ -99,7 +99,7 @@ public class Inventory
                 // Если название предмета в текущей ячейке совпадает с названием добавляемого предмета
                 // И
                 // Если количество предметов в текущей ячейке меньше максимального, т.е. есть место на ещё 1 такой же предмет
-                if (inventoryCells[i].item.name == item.name &&
+                if (inventoryCells[i].itemName == item.name &&
                     inventoryCells[i].number < item.maxInInventoryCell)
                 {
                     // Добавляем предмет, увеличивая количество предметов
@@ -120,8 +120,9 @@ public class Inventory
         if (firstEmptyCellIndex != -1)
         {
             // Добавляем предмет в неё
-            inventoryCells[firstEmptyCellIndex].item = item;
+            inventoryCells[firstEmptyCellIndex].itemName = item.name;
             inventoryCells[firstEmptyCellIndex].number = 1;
+
             return true;
         }
         else
@@ -134,9 +135,9 @@ public class Inventory
     /// Функция, которая удаляет из инвенторя один элемент по текущему индексу
     /// </summary>
     /// <returns> Возвращает удалённый предмет </returns>
-    public Item removeOne()
+    public GameObject RemoveOne()
     {
-        return removeOne(currentCellIndex);
+        return RemoveOne(currentCellIndex);
     }
 
     /// <summary>
@@ -144,7 +145,7 @@ public class Inventory
     /// </summary>
     /// <param name="index"> Индекс ячейки, из которой удаляем предмет </param>
     /// <returns> Возвращает удалённый предмет. Если ячейка была пустой, возвращает null </returns>
-    public Item removeOne(int index)
+    public GameObject RemoveOne(int index)
     {
         if (inventoryCells[index].IsEmpty())
         {
@@ -153,8 +154,10 @@ public class Inventory
         else
         {
             inventoryCells[index].number--;
-           
-            return inventoryCells[index].item;
+
+            GameObject item = Resources.Load("Prefabs/Items/" + inventoryCells[index].itemName) as GameObject;
+
+            return item;
         }
     }
 
@@ -162,7 +165,7 @@ public class Inventory
     /// Функция для сдвига индекса текущей ячейки инвентаря
     /// </summary>
     /// <param name="shiftDirection"> Велчина, на которую необходимо сдвинуть влево/вправо индекс текущей ячейки инвентаря</param>
-    public void shiftCurrentIndex(int shiftDirection)
+    public void ShiftCurrentIndex(int shiftDirection)
     {
         switch (shiftDirection)
         {
@@ -209,7 +212,7 @@ public class Inventory
             }
             else
             {
-                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].item.name;
+                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].itemName;
             }
 
             Debug.Log(cellString);
@@ -229,7 +232,7 @@ public class Inventory
         /// <summary>
         /// Предмет в ячейке
         /// </summary>
-        public Item item;
+        public string itemName;
 
         /// <summary>
         /// Конструктор класса, устанавливает для ячейки значение, которое обозначает, что ячейка пустая

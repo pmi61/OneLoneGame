@@ -5,18 +5,29 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-// Класс-контейнер для хранения свойств предмета
+/// <summary>
+/// Класс для хранения информации о предмете
+/// </summary>
 public class Item : MonoBehaviour
 {
+    /// <summary>
+    /// Маска слоя предметов
+    /// </summary>
     public static LayerMask layerMask;
 
-    // Название предмета
+    /// <summary>
+    /// Название предмета
+    /// </summary>
     new public string name;
 
-    // Описание
+    /// <summary>
+    /// Описание предмета
+    /// </summary>
     public string description;
 
-    // Максимальное количество предметов в одной ячейке инвентаря
+    /// <summary>
+    /// Максимальное количество предметов в одной ячейке инвентаря
+    /// </summary>
     public int maxInInventoryCell;
 
     private void Awake()
