@@ -107,6 +107,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected GameObject arrowPrefab;
     [SerializeField] protected float arrowSpeed;
     [SerializeField] protected float arrowDamage;
+   [SerializeField] protected float spreadAngle;
     [SerializeField] protected float slashAttackRadius;
     [SerializeField] protected float slashDamage;
     [SerializeField] protected LayerMask damageLayer;
@@ -154,7 +155,13 @@ public class Entity : MonoBehaviour
     {
         GameObject arrow = Instantiate(arrowPrefab);
         arrow.transform.position = origin + (dst - origin).normalized;
-        arrow.GetComponent<projectileScript>().Movement = (dst - origin).normalized;
+        Vector2 tmp = (dst - origin).normalized;
+        float t = tmp.x;
+        float angle = UnityEngine.Random.Range(-spreadAngle/2.0f, spreadAngle/2.0f);
+        angle = angle * Mathf.PI / 180.0f;
+        tmp.x = t * Mathf.Cos(angle) - tmp.y * Mathf.Sin(angle);
+        tmp.y = t * Mathf.Sin(angle) + tmp.y * Mathf.Cos(angle);
+        arrow.GetComponent<projectileScript>().Movement = tmp;
         arrow.GetComponent<projectileScript>().StartSpeed = arrowSpeed;
         arrow.GetComponent<projectileScript>().damage = arrowDamage;
         arrow.GetComponent<projectileScript>().enemyTags = enemyTags;

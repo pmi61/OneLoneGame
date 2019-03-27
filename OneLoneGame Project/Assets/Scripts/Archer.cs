@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Archer : Enemy
 {
+    
     protected override void Attack(Transform creature)
     {
            FireArrow(transform.position, creature.position);

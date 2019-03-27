@@ -8,4 +8,6 @@ public class Warrior : Enemy
     {
         AttemptToAttack(transform.position, creature.position - transform.position);
     }
+
+    
 }

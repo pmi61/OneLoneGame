@@ -11350,6 +11350,7 @@ MonoBehaviour:
     type: 3}
   arrowSpeed: 5
   arrowDamage: 10
+  spreadAngle: 0
   slashAttackRadius: 1
   slashDamage: 10
   damageLayer:
@@ -13509,7 +13510,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466261514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05bddbdd571285645b766938e9c09192, type: 3}
   m_Name: 
@@ -13530,6 +13531,7 @@ MonoBehaviour:
     type: 3}
   arrowSpeed: 0
   arrowDamage: 0
+  spreadAngle: 0
   slashAttackRadius: 1
   slashDamage: 10
   damageLayer:
@@ -15639,7 +15641,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578421922235380817}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 110d03b6d8e7f4b479c8e861cfa1db22, type: 3}
   m_Name: 
@@ -15660,20 +15662,21 @@ MonoBehaviour:
     type: 3}
   arrowSpeed: 5
   arrowDamage: 10
+  spreadAngle: 180
   slashAttackRadius: 1
   slashDamage: 10
   damageLayer:
     serializedVersion: 2
     m_Bits: 1024
   Loot: []
-  viewRadius: 0
-  viewAngle: 0
+  viewRadius: 10
+  viewAngle: 360
   targetMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 5120
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   visibleTargets: []
   offset: 1
   aggroDistance: 10
