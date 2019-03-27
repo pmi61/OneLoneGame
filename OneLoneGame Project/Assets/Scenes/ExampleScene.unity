@@ -10966,8 +10966,6 @@ GameObject:
   - component: {fileID: 990563754}
   - component: {fileID: 990563756}
   - component: {fileID: 990563753}
-  - component: {fileID: 990563761}
-  - component: {fileID: 990563762}
   - component: {fileID: 990563757}
   - component: {fileID: 990563760}
   - component: {fileID: 990563759}
@@ -10991,34 +10989,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6997f20a9d051346a77681055862712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 519420031}
+  maxHealth: 100
+  health: 0
+  maxStamina: 100
+  stamina: 0
+  staminaDelta: 10
+  rb: {fileID: 990563757}
+  startSpeed: 3.5
+  animator: {fileID: 990563756}
+  enemyTags:
+  - Enemy
+  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
+    type: 3}
+  arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
+    type: 3}
+  arrowSpeed: 5
+  arrowDamage: 10
+  slashAttackRadius: 1
+  slashDamage: 10
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  Loot: []
   hungerUI: {fileID: 142872458}
   hungerUIcolor: {fileID: 2053789226}
   healthUI: {fileID: 773570501}
   healthUIcolor: {fileID: 842794625}
   staminaUI: {fileID: 1372287037}
   staminaUIcolor: {fileID: 1767974221}
-  rb: {fileID: 990563757}
-  startSpeed: 3.5
-  speed: 3.5
-  maxHealth: 100
-  maxStamina: 100
-  staminaDelta: 10
   hunger: 100
   hungerDelta: 5
-  arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
-    type: 3}
-  slashPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
-    type: 3}
-  arrowStrength: 10
-  slashDamage: 10
-  attackRadius: 1
-  layer:
-    serializedVersion: 2
-    m_Bits: 1024
-  animator: {fileID: 990563756}
-  enemyTags:
-  - Enemy
+  hungerDamage: 10
 --- !u!212 &990563754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11175,38 +11176,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.19, y: 0.18687353}
   m_EdgeRadius: 0
---- !u!114 &990563761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990563752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5fa2494e85ae34a84917f20d1f687f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
-    type: 3}
-  attackRadius: 0.2
-  damage: 0
-  layer:
-    serializedVersion: 2
-    m_Bits: 1024
---- !u!114 &990563762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990563752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d083841e39d61045bd167e9e0729529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: -5
 --- !u!1 &1012690632
 GameObject:
   m_ObjectHideFlags: 0
@@ -12656,11 +12625,8 @@ GameObject:
   - component: {fileID: 1466261515}
   - component: {fileID: 1466261518}
   - component: {fileID: 1466261522}
-  - component: {fileID: 1466261519}
   - component: {fileID: 1466261520}
-  - component: {fileID: 1466261521}
-  - component: {fileID: 1466261523}
-  - component: {fileID: 1466261524}
+  - component: {fileID: 1466261519}
   m_Layer: 10
   m_Name: Knight
   m_TagString: Enemy
@@ -12786,22 +12752,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466261514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba0974564b859074ab166c089aa890bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 05bddbdd571285645b766938e9c09192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 1
-  startSpeed: 1.7
+  maxHealth: 100
+  health: 1
+  maxStamina: 100
+  stamina: 0
+  staminaDelta: 0
+  rb: {fileID: 1466261515}
+  startSpeed: 3.5
+  animator: {fileID: 0}
   enemyTags:
   - Archers
-  - Animals
-  aggroDistance: 10
-  maxHealth: 100
-  maxStamina: 100
-  staminaDelta: 10
-  rb: {fileID: 1466261515}
+  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
+    type: 3}
   arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
     type: 3}
-  arrowStrenght: 5
+  arrowSpeed: 0
+  arrowDamage: 0
+  slashAttackRadius: 1
+  slashDamage: 10
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  Loot: []
+  viewRadius: 10
+  viewAngle: 359
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 5120
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
+  visibleTargets: []
+  offset: 1
+  aggroDistance: 10
 --- !u!114 &1466261520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12823,19 +12809,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
---- !u!114 &1466261521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466261514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d083841e39d61045bd167e9e0729529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
 --- !u!61 &1466261522
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12862,39 +12835,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16949451, y: 0.18259455}
   m_EdgeRadius: 0
---- !u!114 &1466261523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466261514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5fa2494e85ae34a84917f20d1f687f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
-    type: 3}
-  attackRadius: 1
-  damage: 50
-  layer:
-    serializedVersion: 2
-    m_Bits: 1024
---- !u!114 &1466261524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466261514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b47b4a5411271594096b2ed9d7d3d7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Loot:
-  - {fileID: 7868611589496745847, guid: 9ff25b95870c78142a81bc0ef7246281, type: 3}
 --- !u!1 &1472223210
 GameObject:
   m_ObjectHideFlags: 0
@@ -14774,25 +14714,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120980713}
   m_CullTransparentMesh: 0
---- !u!114 &1578421922235380808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578421922235380817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5fa2494e85ae34a84917f20d1f687f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
-    type: 3}
-  attackRadius: 1
-  damage: 10
-  layer:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!61 &1578421922235380809
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14819,19 +14740,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16949451, y: 0.18259455}
   m_EdgeRadius: 0
---- !u!114 &1578421922235380810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578421922235380817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d083841e39d61045bd167e9e0729529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 0
 --- !u!114 &1578421922235380811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14853,20 +14761,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
---- !u!114 &1578421922235380815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578421922235380817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b47b4a5411271594096b2ed9d7d3d7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Loot:
-  - {fileID: 7868611589496745847, guid: 9ff25b95870c78142a81bc0ef7246281, type: 3}
 --- !u!50 &1578421922235380816
 Rigidbody2D:
   serializedVersion: 4
@@ -14902,11 +14796,7 @@ GameObject:
   - component: {fileID: 1578421922235380821}
   - component: {fileID: 1578421922235380809}
   - component: {fileID: 1578421922235380811}
-  - component: {fileID: 1578421922235380810}
-  - component: {fileID: 1578421922235380808}
-  - component: {fileID: 1578421922235380815}
   - component: {fileID: 1578421922235380818}
-  - component: {fileID: 1578421922235380819}
   m_Layer: 10
   m_Name: Archer
   m_TagString: Archers
@@ -14921,79 +14811,44 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578421922235380817}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a024c4e2428c748ae45de040f6f1fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 110d03b6d8e7f4b479c8e861cfa1db22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: 1
-  movement: {x: 0, y: 0, z: 0}
-  startSpeed: 0
-  speed: 0
-  lastDirChange: 0
-  dir: 0
+  maxHealth: 100
+  health: 100
+  maxStamina: 100
+  stamina: 0
+  staminaDelta: 10
+  rb: {fileID: 1578421922235380816}
+  startSpeed: 2
+  animator: {fileID: 0}
   enemyTags:
   - Enemy
-  aggroDistance: 10
-  isEnemySeen: 0
-  maxHealth: 80
-  maxStamina: 0
-  staminaDelta: 0
-  LI: {fileID: 0}
-  rb: {fileID: 1578421922235380816}
-  boxCollider: {fileID: 0}
+  attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
+    type: 3}
   arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
     type: 3}
-  arrowStrenght: 5
-  last: 0
---- !u!114 &1578421922235380819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578421922235380817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26a9aae8e0f54ca4cb3a259e4ffcdf8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  arrowSpeed: 5
+  arrowDamage: 10
+  slashAttackRadius: 1
+  slashDamage: 10
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  Loot: []
+  viewRadius: 0
+  viewAngle: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  visibleTargets: []
   offset: 1
-  startSpeed: 1
-  enemyTags:
-  - Enemy
   aggroDistance: 10
-  maxHealth: 80
-  maxStamina: 0
-  staminaDelta: 0
-  rb: {fileID: 1578421922235380816}
-  arrowPrefab: {fileID: 2927460764040842300, guid: ace33b9a3d245e6429657696a2025353,
-    type: 3}
-  arrowStrenght: 5
 --- !u!61 &1578421922235380821
 BoxCollider2D:
   m_ObjectHideFlags: 0

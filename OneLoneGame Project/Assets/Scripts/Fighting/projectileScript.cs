@@ -17,7 +17,7 @@ public class projectileScript : MonoBehaviour
             return startSpeed;
         }
     }
-     private float speed;
+    private float speed;
     private Vector3 movement;
     public Vector3 Movement
     {
@@ -63,7 +63,7 @@ public class projectileScript : MonoBehaviour
     {
         if (enemyTags.Contains(collision.gameObject.tag))
         {
-            collision.gameObject.GetComponent<LifeIndicators>().TakeDamage(damage);
+            collision.gameObject.GetComponent<Entity>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }
