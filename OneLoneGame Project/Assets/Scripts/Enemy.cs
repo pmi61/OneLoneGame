@@ -28,12 +28,7 @@ public class Enemy : NonPlayer
                 Attack(nearestEnemy);
                 lastAttackTime = now;
             }
-
-            distance = Vector2.Distance(transform.position, nearestEnemy.position);
-            if (distance > offset)
                 movement = GetMovement(nearestEnemy);
-            else
-                movement = new Vector3(0, 0, 0);
         }
         else
         {

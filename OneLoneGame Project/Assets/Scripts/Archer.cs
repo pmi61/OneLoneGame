@@ -14,7 +14,7 @@ public class Archer : Enemy
     {
         int dir;
         Vector2 movement = new Vector2(0, 0);
-        if (!isEnemySeen)
+        if (!isEnemySeen )
         {
             float now = Time.time;
             if (now - lastTimeMoveChange > 1f)
@@ -57,7 +57,7 @@ public class Archer : Enemy
         }
         else
         {
-            return (transform.position - nearestEnemy.position).normalized;
+            return (transform.position - creature.position).normalized;
         }
 
     }
