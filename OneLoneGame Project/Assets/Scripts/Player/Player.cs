@@ -47,6 +47,7 @@ public class Player : Entity
         {
             return;
         }
+        now = Time.time;
         // проверка жизненых показателей
         if (!GameManager.instance.IsInMenu)
         {
@@ -138,15 +139,17 @@ public class Player : Entity
                 if (stamina < 100)
                     GainStamina(Time.deltaTime);
                 #endregion
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Mouse0) && (now - lastAttackTime > 1.5f))
                 {
+                    lastAttackTime = now;
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
                     AttemptToAttack(transform.position, (pz - transform.position));
                 }
                 else
-                    if (Input.GetKeyDown(KeyCode.Mouse1))
+                    if (Input.GetKeyDown(KeyCode.Mouse1) && (now - lastAttackTime > 1.5f))
                 {
+                    lastAttackTime = now;
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
                     FireArrow(transform.position, pz);

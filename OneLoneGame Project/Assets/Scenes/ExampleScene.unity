@@ -11336,7 +11336,7 @@ MonoBehaviour:
   staminaUIcolor: {fileID: 1767974221}
   hunger: 100
   hungerDelta: 5
-  hungerDamage: 10
+  hungerDamage: 0
 --- !u!212 &990563754
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15542,7 +15542,7 @@ PrefabInstance:
     - target: {fileID: 1926223205066309524, guid: 4076d905e390bb34a805951abcf490d6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1926223205066309523, guid: 4076d905e390bb34a805951abcf490d6,
         type: 3}

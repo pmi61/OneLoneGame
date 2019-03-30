@@ -67,6 +67,7 @@ public class NonPlayer : Entity
         isEnemySeen = false;
         SetMaxValues(maxHealth, maxStamina, staminaDelta);
         StartCoroutine("FindTargetsWithDelay", .2f);
+        lastAttackTime = 0;
     }
 
     // Update is called once per frame
@@ -74,6 +75,7 @@ public class NonPlayer : Entity
     {
         if (!GameManager.instance.isGameRunning || GameManager.instance.IsInMenu)
             return;
+        now = Time.time;
         Live();
     }
 

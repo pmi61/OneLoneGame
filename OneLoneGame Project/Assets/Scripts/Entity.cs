@@ -113,6 +113,8 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask damageLayer;
     // Созданная атака
     protected GameObject attack;
+    protected float now;
+    protected float lastAttackTime;
 
 
     /// <summary>
@@ -180,6 +182,7 @@ public class Entity : MonoBehaviour
             GameObject i = Instantiate(item);
             i.transform.position = transform.position;
         }
+        Instantiate(Resources.Load<AudioSource>("Prefabs/Audio/DeathVoice"));
         Destroy(gameObject);
     }
     #endregion
