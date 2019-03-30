@@ -22,10 +22,10 @@ class GameManager : MonoBehaviour
     public bool isGameRunning;
 
     /* главный источник освещения */
-   [SerializeField]private Light sun;
-    public Light Sun { get { return sun; } }
-       
+    public TimeController TimeControl;
 
+
+    
     private void Awake()
     {
         Debug.Log("GameManaer Awake");
@@ -65,6 +65,8 @@ class GameManager : MonoBehaviour
         {
             Debug.Log("Can't find Death Screen");
         }
+        TimeControl = GetComponent<TimeController>();
+      
     }
 
     public void GameOver()

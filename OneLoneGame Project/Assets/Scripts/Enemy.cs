@@ -32,8 +32,8 @@ public class Enemy : NonPlayer
         }
         else
         {
-            movement = GetMovement();
             isEnemySeen = false;
+            movement = GetMovement();
         }        
         rb.velocity = movement * speed;
     }

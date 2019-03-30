@@ -81,7 +81,7 @@ public class NonPlayer : Entity
     virtual protected Vector2 GetMovement()
     {
         int dir;
-        Vector2 movement = new Vector2(0,0);
+        Vector2 movement = this.movement;
         if (!isEnemySeen)
         {
             float now = Time.time;

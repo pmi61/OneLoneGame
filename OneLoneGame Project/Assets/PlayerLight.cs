@@ -7,6 +7,6 @@ public class PlayerLight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       GetComponent<Light>().enabled = !GameManager.instance.Sun.enabled;
+       //GetComponent<Light>().enabled = !GameManager.instance.Sun.enabled;
     }
 }
