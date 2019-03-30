@@ -31,14 +31,30 @@ public class Player : Entity
     [SerializeField] protected float hungerDelta;
     [SerializeField] protected float hungerDamage;
 
+    [Header("Step sounds:")]
+    UnityEngine.Object[] steps;
+    float startStepTime = 0.3f;
+    float stepTime;
+    int stepNum;
+    float lastStepTime;
     void Start()
     {
+        stepNum = 0;
+        stepTime = startStepTime;
+        steps = new UnityEngine.Object[4];
+        for (int i = 1; i < 5; i++)
+        {
+            string l = "Prefabs/Audio/Step";
+            l += i;
+           steps[i-1] = Resources.Load(l);
+        }
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
         SetMaxValues(maxHealth, maxStamina, staminaDelta);
         // Создаём инвентарь на 5 слотов
         inventory = new Inventory(5);
+        lastStepTime = 0;
     }
 
     void Update()
@@ -126,12 +142,19 @@ public class Player : Entity
             {
                 #region stamina
                 if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0f)
+                {
                     speed = startSpeed * 2;
+                    stepTime = startStepTime * 0.5f;
+                }
                 else
                 if (Input.GetKeyUp(KeyCode.LeftShift) || stamina < 0.0f)
+                {
                     speed = startSpeed;
-                else
-                    movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+                    stepTime = startStepTime;
+                }
+            
+            else
+                movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
                 if (stamina > -1 && speed != startSpeed)
                     Run(Time.deltaTime);
@@ -155,6 +178,14 @@ public class Player : Entity
                     FireArrow(transform.position, pz);
                 }
             }
+        }
+
+        if (now - lastStepTime > stepTime && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
+        {
+            lastStepTime = now;
+            GameObject t = Instantiate(steps[stepNum] as GameObject);
+            stepNum = (stepNum + 2) % 3;
+            t.transform.position = transform.position;
         }
 
         #endregion
