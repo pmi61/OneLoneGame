@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class Player : Entity
 {
@@ -19,6 +20,7 @@ public class Player : Entity
     Inventory inventory;
 
     [Header("UI")]
+    public TextMeshProUGUI clockUI;
     public Slider hungerUI;
     public Image hungerUIcolor;
     public Slider healthUI;
@@ -95,6 +97,8 @@ public class Player : Entity
 
             staminaUI.value =stamina;
             staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
+
+
             #endregion
 
             // движение
@@ -135,6 +139,8 @@ public class Player : Entity
             GameManager.instance.OnESC();
             healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
             staminaUI.gameObject.SetActive(!staminaUI.gameObject.activeSelf);
+            hungerUI.gameObject.SetActive(!hungerUI.gameObject.activeSelf);
+            clockUI.gameObject.SetActive(!clockUI.gameObject.activeSelf);
         }
         else
         {

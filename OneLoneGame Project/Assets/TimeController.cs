@@ -23,6 +23,8 @@ public class TimeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.IsInMenu || !GameManager.instance.isGameRunning)
+            return;
         string t = ((int)timeInHours).ToString() + ":";
         float d = timeInHours - (int)timeInHours;
         d = Mathf.Round(Mathf.Round(d * 100f) * 0.6f);

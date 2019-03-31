@@ -11328,6 +11328,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   Loot: []
+  clockUI: {fileID: 988707800}
   hungerUI: {fileID: 142872458}
   hungerUIcolor: {fileID: 2053789226}
   healthUI: {fileID: 773570501}
