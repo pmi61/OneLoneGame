@@ -15,7 +15,7 @@ public class TimeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       timeInHours = 12.0f;
+       timeInHours = 0;
         sun.intensity = 1;
         sun.GetComponent<LighintScript>().time = LighintScript.state.daytime;
     }
