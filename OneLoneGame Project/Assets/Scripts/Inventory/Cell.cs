@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 public class Cell
 {
     /// <summary>
+    /// Предмет в ячейке
+    /// </summary>
+    public ItemData itemData;
+
+    /// <summary>
     /// Количество предметов в ячейке
     /// </summary>
     public int number;
-
-    /// <summary>
-    /// Предмет в ячейке
-    /// </summary>
-    public string itemName;
 
     /// <summary>
     /// Конструктор класса, устанавливает для ячейки значение, которое обозначает, что ячейка пустая

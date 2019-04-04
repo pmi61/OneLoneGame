@@ -204,18 +204,22 @@ public class Player : Entity
     /// </summary>
     public void AttemptAddItems()
     {
-        Collider2D[] itemsToAdd = Physics2D.OverlapCircleAll(transform.position, ATTEMPT_ADD_ITEM_RADIUS, Item.layerMask);
+        Collider2D[] itemsToAdd = Physics2D.OverlapCircleAll(transform.position, ATTEMPT_ADD_ITEM_RADIUS, ItemController.layerMask);
 
-        Item item;
+        ItemData itemData;
+        ItemController itemController;
+
         for (int i = 0; i < itemsToAdd.Length; i++)
         {
-            item = itemsToAdd[i].transform.GetComponent<Item>();
+            itemController = itemsToAdd[i].transform.GetComponent<ItemController>();
+            itemData = itemController.itemData;
 
-            if (inventory.AttemptAdd(item))
+            if (inventory.AttemptAdd(itemData))
             {
-                Debug.Log("Item \"" + item.name + "\" was added");
+                Debug.Log("Item \"" + itemData.name + "\" was added");
                 inventory.PrintDebug();
-                Destroy(item.gameObject);
+
+                Destroy(itemController.gameObject);
             }
         }
     }

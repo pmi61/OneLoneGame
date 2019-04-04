@@ -85,7 +85,7 @@ public class Inventory
     /// <param name="item"> Предмет, который мы хотим добавить. </param>
     /// <returns> Возвращает true, если добавить предмет получилось, иначе возвращает false</returns>
     /// <remarks> Ищет либо ячейку с таким же предметом, либо пустую ячейку</remarks>
-    public bool AttemptAdd(Item item)
+    public bool AttemptAdd(ItemData item)
     {
         // Индекс первой пустой ячейки в инвентаре
         // -1 сигнализирует о том, что пустых ячеек нет
@@ -99,8 +99,8 @@ public class Inventory
                 // Если название предмета в текущей ячейке совпадает с названием добавляемого предмета
                 // И
                 // Если количество предметов в текущей ячейке меньше максимального, т.е. есть место на ещё 1 такой же предмет
-                if (inventoryCells[i].itemName == item.name &&
-                    inventoryCells[i].number < item.maxInInventoryCell)
+                if (inventoryCells[i].itemData.name == item.name &&
+                    inventoryCells[i].number < inventoryCells[i].itemData.maxInInventoryCell)
                 {
                     // Добавляем предмет, увеличивая количество предметов
                     inventoryCells[i].number++;
@@ -120,7 +120,7 @@ public class Inventory
         if (firstEmptyCellIndex != -1)
         {
             // Добавляем предмет в неё
-            inventoryCells[firstEmptyCellIndex].itemName = item.name;
+            inventoryCells[firstEmptyCellIndex].itemData = item;
             inventoryCells[firstEmptyCellIndex].number = 1;
 
             return true;
@@ -155,7 +155,7 @@ public class Inventory
         {
             inventoryCells[index].number--;
 
-            GameObject item = Resources.Load("Prefabs/Items/" + inventoryCells[index].itemName) as GameObject;
+            GameObject item = Resources.Load("Prefabs/Items/" + inventoryCells[index].itemData.name) as GameObject;
 
             return item;
         }
@@ -212,7 +212,7 @@ public class Inventory
             }
             else
             {
-                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].itemName;
+                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].itemData.name;
             }
 
             Debug.Log(cellString);

@@ -8,13 +8,10 @@ using UnityEngine;
 /// <summary>
 /// Класс для хранения информации о предмете
 /// </summary>
-public class Item : MonoBehaviour
-{
-    /// <summary>
-    /// Маска слоя предметов
-    /// </summary>
-    public static LayerMask layerMask;
 
+[CreateAssetMenu(fileName = "New Item", menuName = "Item Data", order = 51)]
+public class ItemData : ScriptableObject
+{
     /// <summary>
     /// Название предмета
     /// </summary>
@@ -29,9 +26,4 @@ public class Item : MonoBehaviour
     /// Максимальное количество предметов в одной ячейке инвентаря
     /// </summary>
     public int maxInInventoryCell;
-
-    private void Awake()
-    {
-        layerMask = LayerMask.GetMask("Items");
-    }
 }
