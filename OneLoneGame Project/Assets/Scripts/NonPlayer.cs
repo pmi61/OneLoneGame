@@ -144,10 +144,13 @@ public class NonPlayer : Entity
             float distance = Vector2.Distance(transform.position, nearestCreature.position);
             foreach (Transform creature in visibleTargets)
             {
-                if (creature != nearestCreature && distance > Vector2.Distance(transform.position, creature.position))
+                if (creature != null)
                 {
-                    nearestCreature = creature;
-                    distance = Vector2.Distance(transform.position, creature.position);
+                    if (creature != nearestCreature && distance > Vector2.Distance(transform.position, creature.position))
+                    {
+                        nearestCreature = creature;
+                        distance = Vector2.Distance(transform.position, creature.position);
+                    }
                 }
             }
         }

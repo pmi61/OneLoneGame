@@ -63,6 +63,7 @@ public class Player : Entity
     {
         if (!GameManager.instance.isGameRunning)
         {
+            rb.velocity = new Vector2(0,0);
             return;
         }
         now = Time.time;
@@ -95,7 +96,7 @@ public class Player : Entity
             healthUI.value = health;
             healthUIcolor.color = Color.Lerp(Color.red, Color.green, healthUI.value / healthUI.maxValue);
 
-            staminaUI.value =stamina;
+            staminaUI.value = stamina;
             staminaUIcolor.color = Color.Lerp(Color.black, new Color(0.2f, 0.75f, 1, 1), staminaUI.value / staminaUI.maxValue * 100);
 
 
@@ -133,6 +134,8 @@ public class Player : Entity
             #endregion
 
         }
+        else
+            rb.velocity = new Vector2(0, 0);
         #region Input
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
