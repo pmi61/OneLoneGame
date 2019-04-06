@@ -8,8 +8,21 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance = null;
 
+    /// <summary>
+    /// Функция-делегат, которая вызывается, когда нужно обновить
+    /// визуальное содержимое инвентаря
+    /// </summary>
     public delegate void OnInventoryChanged();
     public OnInventoryChanged onInventoryChangedCallBack;
+
+    /// <summary>
+    /// Функция-делегат, которая вызывается, когда нужно обновить
+    /// цвет выбранной ячейки
+    /// </summary>
+    /// <param name="prevIndex"> Индекс ячейки, которая была выбранна ранее </param>
+    /// <param name="curIndex"> Индекс новой выбранной ячейки </param>
+    public delegate void OnCurrentIndexChanged(int prevIndex, int curIndex);
+    public OnCurrentIndexChanged onCurrentIndexChangedCallBack;
 
     /// <summary>
     /// Код для сдвига текущей ячейки назад на одну позицию
@@ -24,8 +37,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Список ячеек инвентаря
     /// </summary>
-    /// <seealso cref="Inventory.Cell"/>
-    public List<InventoryCell> inventoryCells;
+    public List<InventoryCell> cells;
 
     /// <summary>
     /// Индекс текущей ячейки инвентаря
@@ -35,7 +47,6 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Количество ячеек в инвентаре
     /// </summary> 
-    
     public int cellNumber;
 
     void Awake()
@@ -47,12 +58,12 @@ public class Inventory : MonoBehaviour
             // Если не существует, инициализируем
             instance = this;
 
-            inventoryCells = new List<InventoryCell>();
+            cells = new List<InventoryCell>();
 
             // Создаём пустые ячейки
             for (int i = 0; i < cellNumber; i++)
             {
-                inventoryCells.Add(new InventoryCell());
+                cells.Add(new InventoryCell());
             }
         }
         // Если instance уже существует, и он не ссылается на текущий экземпляр:
@@ -77,6 +88,8 @@ public class Inventory : MonoBehaviour
         }
         set
         {
+            int prevIndex = currentCellIndex;
+
             if (value < 0)
             {
                 currentCellIndex = 0;
@@ -89,6 +102,8 @@ public class Inventory : MonoBehaviour
             {
                 currentCellIndex = value;
             }
+
+            onCurrentIndexChangedCallBack.Invoke(prevIndex, currentCellIndex);
         }
     }
 
@@ -107,16 +122,16 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < cellNumber; i++)
         {
             // Если ячейка не пустая
-            if (!inventoryCells[i].IsEmpty())
+            if (!cells[i].IsEmpty())
             {
                 // Если название предмета в текущей ячейке совпадает с названием добавляемого предмета
                 // И
                 // Если количество предметов в текущей ячейке меньше максимального, т.е. есть место на ещё 1 такой же предмет
-                if (inventoryCells[i].itemData.name == item.name &&
-                    inventoryCells[i].number < inventoryCells[i].itemData.maxInInventoryCell)
+                if (cells[i].itemData.name == item.name &&
+                    cells[i].number < cells[i].itemData.maxInInventoryCell)
                 {
                     // Добавляем предмет, увеличивая количество предметов
-                    inventoryCells[i].number++;
+                    cells[i].number++;
 
                     if (onInventoryChangedCallBack != null)
                     {
@@ -138,8 +153,8 @@ public class Inventory : MonoBehaviour
         if (firstEmptyCellIndex != -1)
         {
             // Добавляем предмет в неё
-            inventoryCells[firstEmptyCellIndex].itemData = item;
-            inventoryCells[firstEmptyCellIndex].number = 1;
+            cells[firstEmptyCellIndex].itemData = item;
+            cells[firstEmptyCellIndex].number = 1;
 
             if (onInventoryChangedCallBack != null)
             {
@@ -169,15 +184,15 @@ public class Inventory : MonoBehaviour
     /// <returns> Возвращает удалённый предмет. Если ячейка была пустой, возвращает null </returns>
     public GameObject RemoveOne(int index)
     {
-        if (inventoryCells[index].IsEmpty())
+        if (cells[index].IsEmpty())
         {
             return null;
         }
         else
         {
-            inventoryCells[index].number--;
+            cells[index].number--;
 
-            GameObject item = Resources.Load("Prefabs/Items/" + inventoryCells[index].itemData.name) as GameObject;
+            GameObject item = Resources.Load("Prefabs/Items/" + cells[index].itemData.name) as GameObject;
 
             if (onInventoryChangedCallBack != null)
             {
@@ -193,6 +208,8 @@ public class Inventory : MonoBehaviour
     /// <param name="shiftDirection"> Велчина, на которую необходимо сдвинуть влево/вправо индекс текущей ячейки инвентаря</param>
     public void ShiftCurrentIndex(int shiftDirection)
     {
+        int prevIndex = currentCellIndex;
+
         switch (shiftDirection)
         {
             case SHIFT_LEFT:
@@ -218,6 +235,7 @@ public class Inventory : MonoBehaviour
                 break;
         }
 
+        onCurrentIndexChangedCallBack.Invoke(prevIndex, currentCellIndex);
     }
 
     /// <summary>
@@ -232,13 +250,13 @@ public class Inventory : MonoBehaviour
         {
             cellString = "Cell №" + i + ": ";
 
-            if (inventoryCells[i].IsEmpty())
+            if (cells[i].IsEmpty())
             {
                 cellString += "Empty";
             }
             else
             {
-                cellString += inventoryCells[i].number.ToString() + " " + inventoryCells[i].itemData.name;
+                cellString += cells[i].number.ToString() + " " + cells[i].itemData.name;
             }
 
             Debug.Log(cellString);

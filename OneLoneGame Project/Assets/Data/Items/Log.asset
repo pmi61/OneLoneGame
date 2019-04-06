@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf9de4bfbb75bf49943434e18271599, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300332, guid: 2b4584eff8cccd340a151d6844c9e322, type: 3}
   name: Log
   description: Some Item
   maxInInventoryCell: 3
