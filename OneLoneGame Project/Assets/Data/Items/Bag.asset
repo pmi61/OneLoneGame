@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf9de4bfbb75bf49943434e18271599, type: 3}
   m_Name: Bag
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  maxInInventoryCell: 0
+  icon: {fileID: 0}
+  name: Bag
+  description: Some Item
+  maxInInventoryCell: 2

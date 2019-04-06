@@ -54,8 +54,8 @@ public class Player : Entity
         boxCollider = GetComponent<BoxCollider2D>();
         speed = startSpeed;
         SetMaxValues(maxHealth, maxStamina, staminaDelta);
-        // Создаём инвентарь на 5 слотов
-        inventory = new Inventory(5);
+        // Добавляем инвентарь
+        inventory = Inventory.instance;
         lastStepTime = 0;
     }
 
@@ -220,7 +220,7 @@ public class Player : Entity
             if (inventory.AttemptAdd(itemData))
             {
                 Debug.Log("Item \"" + itemData.name + "\" was added");
-                inventory.PrintDebug();
+                //inventory.PrintDebug();
 
                 Destroy(itemController.gameObject);
             }
