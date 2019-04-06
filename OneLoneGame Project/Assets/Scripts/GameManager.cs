@@ -23,8 +23,6 @@ class GameManager : MonoBehaviour
 
     /* главный источник освещения */
     public TimeController TimeControl;
-
-
     
     private void Awake()
     {

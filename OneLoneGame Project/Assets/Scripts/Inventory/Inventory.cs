@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Класс, в котором хранится заданное количество ячеек инвентаря
 /// </summary>
-public class Inventory
+public class Inventory : MonoBehaviour
 {
+    public static Inventory instance = null;
+
+    public delegate void OnInventoryChanged();
+    public OnInventoryChanged onInventoryChangedCallBack;
+
     /// <summary>
     /// Код для сдвига текущей ячейки назад на одну позицию
     /// </summary>
@@ -24,7 +25,7 @@ public class Inventory
     /// Список ячеек инвентаря
     /// </summary>
     /// <seealso cref="Inventory.Cell"/>
-    private List<Cell> inventoryCells;
+    public List<InventoryCell> inventoryCells;
 
     /// <summary>
     /// Индекс текущей ячейки инвентаря
@@ -33,8 +34,37 @@ public class Inventory
 
     /// <summary>
     /// Количество ячеек в инвентаре
-    /// </summary>    
-    protected int cellNumber;
+    /// </summary> 
+    
+    public int cellNumber;
+
+    void Awake()
+    {
+        // Проверяем существование instance
+        if (instance == null)
+        {
+            Debug.Log("Create instance of GameManager");
+            // Если не существует, инициализируем
+            instance = this;
+
+            inventoryCells = new List<InventoryCell>();
+
+            // Создаём пустые ячейки
+            for (int i = 0; i < cellNumber; i++)
+            {
+                inventoryCells.Add(new InventoryCell());
+            }
+        }
+        // Если instance уже существует, и он не ссылается на текущий экземпляр:
+        else if (instance != this)
+        {
+            // Унитожаем его. Это соответствует концепции синглетного класса,
+            // которая значит, что во всём приложении может быть только один экземпляр такого класса
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
 
     /// <summary>
     /// Свойство для задания значения индекса текущей ячейки инвентаря
@@ -63,23 +93,6 @@ public class Inventory
     }
 
     /// <summary>
-    /// Конструктор класса
-    /// </summary>
-    /// <param name="cellNumber"> Количество ячеек в создаваемом инвентаре </param>
-    /// <seealso cref="Inventory.Cell"/>
-    public Inventory(int cellNumber)
-    {
-        this.cellNumber = cellNumber;
-        inventoryCells = new List<Cell>();
-
-        // Создаём пустые ячейки
-        for (int i = 0; i < cellNumber; i++)
-        {
-            inventoryCells.Add(new Cell());
-        }
-    }
-
-    /// <summary>
     ///  Функция для добавления предмета в инвентарь.
     /// </summary>
     /// <param name="item"> Предмет, который мы хотим добавить. </param>
@@ -104,6 +117,11 @@ public class Inventory
                 {
                     // Добавляем предмет, увеличивая количество предметов
                     inventoryCells[i].number++;
+
+                    if (onInventoryChangedCallBack != null)
+                    {
+                        onInventoryChangedCallBack.Invoke();
+                    }
                     // Выходим из функции
                     return true;
                 }
@@ -123,6 +141,10 @@ public class Inventory
             inventoryCells[firstEmptyCellIndex].itemData = item;
             inventoryCells[firstEmptyCellIndex].number = 1;
 
+            if (onInventoryChangedCallBack != null)
+            {
+                onInventoryChangedCallBack.Invoke();
+            }
             return true;
         }
         else
@@ -157,6 +179,10 @@ public class Inventory
 
             GameObject item = Resources.Load("Prefabs/Items/" + inventoryCells[index].itemData.name) as GameObject;
 
+            if (onInventoryChangedCallBack != null)
+            {
+                onInventoryChangedCallBack.Invoke();
+            }
             return item;
         }
     }

@@ -13,17 +13,22 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     /// <summary>
+    /// Иконка для инвентаря
+    /// </summary>
+    public Sprite icon = null;
+
+    /// <summary>
     /// Название предмета
     /// </summary>
-    new public string name;
+    new public string name = "New Item";
 
     /// <summary>
     /// Описание предмета
     /// </summary>
-    public string description;
+    public string description = "Some Item";
 
     /// <summary>
     /// Максимальное количество предметов в одной ячейке инвентаря
     /// </summary>
-    public int maxInInventoryCell;
+    public int maxInInventoryCell = 1;
 }

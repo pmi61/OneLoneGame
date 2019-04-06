@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/// <summary>
-/// Вложенный класс с информацией о ячейке инвентаря
-/// </summary>
-public class Cell
+﻿public class InventoryCell
 {
     /// <summary>
     /// Предмет в ячейке
@@ -18,14 +9,6 @@ public class Cell
     /// Количество предметов в ячейке
     /// </summary>
     public int number;
-
-    /// <summary>
-    /// Конструктор класса, устанавливает для ячейки значение, которое обозначает, что ячейка пустая
-    /// </summary>
-    public Cell()
-    {
-        SetEmpty();
-    }
 
     /// <summary>
     /// Проверяет, является ли ячейка пустой
@@ -43,11 +26,32 @@ public class Cell
         }
     }
 
+    public bool AttemptAdd(ItemData newItem)
+    {
+        if (IsEmpty())
+        {
+            itemData = newItem;
+            return true;
+        }
+        else
+        {
+            if (number < itemData.maxInInventoryCell)
+            {
+                number++;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary>
     ///  Функция, которая устанавливает ячейку пустой
     /// </summary>
-    public void SetEmpty()
+    public void Clear()
     {
         number = 0;
+        itemData = null;
     }
 }
+
