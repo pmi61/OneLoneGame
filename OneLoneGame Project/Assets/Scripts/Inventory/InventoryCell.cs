@@ -1,4 +1,7 @@
-﻿public class InventoryCell
+﻿/// <summary>
+/// Класс-контейнер для ячейки инвентаря
+/// </summary>
+public class InventoryCell
 {
     /// <summary>
     /// Предмет в ячейке
@@ -24,25 +27,6 @@
         {
             return false;
         }
-    }
-
-    public bool AttemptAdd(ItemData newItem)
-    {
-        if (IsEmpty())
-        {
-            itemData = newItem;
-            return true;
-        }
-        else
-        {
-            if (number < itemData.maxInInventoryCell)
-            {
-                number++;
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /// <summary>

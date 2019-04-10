@@ -128,8 +128,10 @@ public class Player : Entity
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
+                // Бросаем предмет
                 DropItem();
             }
+            // Пытаемся добавить все предметы в некотором радиусе
             AttemptAddItems();
             #endregion
 
@@ -217,11 +219,12 @@ public class Player : Entity
             itemController = itemsToAdd[i].transform.GetComponent<ItemController>();
             itemData = itemController.itemData;
 
+            // Пытаемся добавить предмет в инвентарь
             if (inventory.AttemptAdd(itemData))
             {
                 Debug.Log("Item \"" + itemData.name + "\" was added");
-                //inventory.PrintDebug();
 
+                // Если получилось, уничтожаем предмет
                 Destroy(itemController.gameObject);
             }
         }
@@ -244,8 +247,6 @@ public class Player : Entity
                                          animator.GetFloat("Vertical") * DROP_ITEM_RADIUS);
 
             Vector3 dropPosition = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, 0);
-
-            inventory.PrintDebug();
 
             // Создаём предмет
             Instantiate(item.gameObject, dropPosition, Quaternion.identity);
