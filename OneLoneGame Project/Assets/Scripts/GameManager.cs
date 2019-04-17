@@ -7,7 +7,7 @@ class GameManager : MonoBehaviour
 
     //private GameObject canvas;
     private GameObject menus;
-
+    private GameObject UI;
     /* переменные для меню */
     private bool isInMenu = false;
 
@@ -57,6 +57,7 @@ class GameManager : MonoBehaviour
 
         isGameRunning = true;
         menus = GameObject.Find("Menus");
+        UI = GameObject.Find("UI");
         isInMenu = false;
 
         if (menus == null)
@@ -73,7 +74,7 @@ class GameManager : MonoBehaviour
 
         isInMenu = true;
         menus.transform.Find("DeathScreen").gameObject.SetActive(true);
-
+        UI.GetComponent<Canvas>().enabled = false;
         menus.GetComponent<Canvas>().enabled = true;
 
         isGameRunning = false;
@@ -100,8 +101,10 @@ class GameManager : MonoBehaviour
     public void OnESC()
     {
         menus.transform.Find("ESCMenu").gameObject.SetActive(!IsInMenu);
+        UI.GetComponent<Canvas>().enabled = !UI.GetComponent<Canvas>().enabled;
         isInMenu = !isInMenu;
         menus.GetComponent<Canvas>().enabled = !menus.GetComponent<Canvas>().enabled;
+
     }
 }
 

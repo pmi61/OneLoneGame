@@ -142,10 +142,10 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
             GameManager.instance.OnESC();
-            healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
-            staminaUI.gameObject.SetActive(!staminaUI.gameObject.activeSelf);
-            hungerUI.gameObject.SetActive(!hungerUI.gameObject.activeSelf);
-            clockUI.gameObject.SetActive(!clockUI.gameObject.activeSelf);
+         //   healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
+         //   staminaUI.gameObject.SetActive(!staminaUI.gameObject.activeSelf);
+          //  hungerUI.gameObject.SetActive(!hungerUI.gameObject.activeSelf);
+          //  clockUI.gameObject.SetActive(!clockUI.gameObject.activeSelf);
         }
         else
         {
