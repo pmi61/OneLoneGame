@@ -1,10 +1,20 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MapGenerator : MonoBehaviour
 {
-    public enum DrawMode { NoiseMap, ColorMap}
+    public enum DrawMode { NoiseMap, ColorMap, TileMap }
     public DrawMode drawMode;
+
+    [System.Serializable]
+    public struct TerrainType
+    {
+        public string name;
+        public float height;
+        public Color color;
+        public Tile tile;
+    }
 
     public int mapWidth;
     public int mapHeight;
@@ -18,29 +28,13 @@ public class MapGenerator : MonoBehaviour
     public int seed;
     public Vector2 offset;
 
+    public TerrainType[] regions;
+
     public bool autoUpdate;
 
-    public TerrainType[] regions; 
-
-    public void GenerateMap() {
+    public void GenerateMap()
+    {
         float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, seed, noiseScale, octaves, persistence, lacunarity, offset);
-
-        Color[] colorMap = new Color[mapWidth * mapHeight];
-        for (int y = 0; y < mapHeight; y++)
-        {
-            for (int x = 0; x < mapWidth; x++)
-            {
-                float currentHeight = noiseMap[x, y];
-                for (int i = 0; i < regions.Length; i++)
-                {
-                    if (currentHeight <= regions[i].height)
-                    {
-                        colorMap[y * mapWidth + x] = regions[i].color;
-                        break;
-                    }
-                }
-            }
-        }
 
         MapDisplay display = FindObjectOfType<MapDisplay>();
 
@@ -50,15 +44,47 @@ public class MapGenerator : MonoBehaviour
         }
         else if (drawMode == DrawMode.ColorMap)
         {
+            Color[] colorMap = new Color[mapWidth * mapHeight];
+            for (int y = 0; y < mapHeight; y++)
+            {
+                for (int x = 0; x < mapWidth; x++)
+                {
+                    float currentHeight = noiseMap[x, y];
+                    for (int i = 0; i < regions.Length; i++)
+                    {
+                        if (currentHeight <= regions[i].height)
+                        {
+                            colorMap[y * mapWidth + x] = regions[i].color;
+                            break;
+                        }
+                    }
+                }
+            }
+
             display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
         }
-    }
+        else if (drawMode == DrawMode.TileMap)
+        {
+            Tile[] tiles = new Tile[mapHeight * mapWidth];
+            for (int y = 0; y < mapHeight; y++)
+            {
+                for (int x = 0; x < mapWidth; x++)
+                {
+                    float currentHeight = noiseMap[x, y];
+                    for (int i = 0; i < regions.Length; i++)
+                    {
+                        if (currentHeight <= regions[i].height)
+                        {
+                            tiles[y * mapWidth + x] = regions[i].tile;
+                            break;
+                        }
+                    }
+                }
+            }
 
-    [System.Serializable]
-    public struct TerrainType {
-        public string name;
-        public float height;
-        public Color color;
+            //display.DrawTilemap(TilemapGenerator.GenerateTilemap(tiles, mapWidth, mapHeight));
+            display.DrawTilemap(tiles, mapWidth, mapHeight);
+        }
     }
 
     private void OnValidate()
@@ -84,4 +110,4 @@ public class MapGenerator : MonoBehaviour
             octaves = 0;
         }
     }
-} 
+}
