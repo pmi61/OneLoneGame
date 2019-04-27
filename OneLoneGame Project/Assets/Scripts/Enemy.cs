@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : NonPlayer
 {
-    protected float lastAttackTime;
     // Start is called before the first frame update
 
     virtual protected void Attack(Transform creature)

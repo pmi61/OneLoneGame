@@ -18,6 +18,7 @@ public class projectileScript : MonoBehaviour
         }
     }
     private float speed;
+    private float lifeTime = 2.0f;
     private Vector3 movement;
     public Vector3 Movement
     {
@@ -39,6 +40,7 @@ public class projectileScript : MonoBehaviour
         speed = StartSpeed;
         float angle = Vector3.SignedAngle(new Vector2(1, 0), movement, new Vector3(0, 0, 1)) - 45 ;
         transform.Rotate(0, 0, angle);
+        Destroy(gameObject, lifeTime);
     }
 
     // Update is called once per frame
@@ -47,16 +49,13 @@ public class projectileScript : MonoBehaviour
         if (!GameManager.instance.IsInMenu)
         {
             travelledDistance += speed * Time.deltaTime;
-            transform.position += movement * speed * Time.deltaTime;
-            if (travelledDistance > maxDistance)
-                Destroy(gameObject);
+           // transform.position += movement * speed * Time.deltaTime;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
       
-            //Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

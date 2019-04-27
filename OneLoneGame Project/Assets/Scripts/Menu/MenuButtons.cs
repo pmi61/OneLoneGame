@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
-public class MenuButtons : MonoBehaviour {
+public class MenuButtons : NetworkBehaviour {
 
 	public void ExitButton()
     {
@@ -13,6 +14,7 @@ public class MenuButtons : MonoBehaviour {
     public void PlayButton()
     {
         SceneManager.LoadScene("ExampleScene");
+        //NetworkServer.Spawn();
         GameManager.instance.InitGame();
         //GameManager.instance.enabled = true;
         //GameManager.instance.isGameRunning = true;

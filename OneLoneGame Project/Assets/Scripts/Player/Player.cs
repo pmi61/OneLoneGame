@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using UnityEngine.Networking;
 
 public class Player : Entity
 {
@@ -41,6 +42,11 @@ public class Player : Entity
     float lastStepTime;
     void Start()
     {
+        if (!isLocalPlayer)
+        {
+            transform.FindChild("Main Camera").gameObject.SetActive(false);
+            return;
+        }
         stepNum = 0;
         stepTime = startStepTime;
         steps = new UnityEngine.Object[4];
@@ -61,9 +67,11 @@ public class Player : Entity
 
     void Update()
     {
+        if (!isLocalPlayer)
+            return;
         if (!GameManager.instance.isGameRunning)
         {
-            rb.velocity = new Vector2(0,0);
+            rb.velocity = new Vector2(0, 0);
             return;
         }
         now = Time.time;
@@ -126,7 +134,7 @@ public class Player : Entity
                 inventory.ShiftCurrentIndex(Inventory.SHIFT_RIGHT);
                 print("Current inventory index " + inventory.CurrentCellIndex);
             }
-            else if (Input.GetKeyDown(KeyCode.X))
+            else if (Input.GetKeyDown(KeyCode.O))
             {
                 // Бросаем предмет
                 DropItem();
@@ -142,14 +150,10 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
             GameManager.instance.OnESC();
-         //   healthUI.gameObject.SetActive(!healthUI.gameObject.activeSelf);
-         //   staminaUI.gameObject.SetActive(!staminaUI.gameObject.activeSelf);
-          //  hungerUI.gameObject.SetActive(!hungerUI.gameObject.activeSelf);
-          //  clockUI.gameObject.SetActive(!clockUI.gameObject.activeSelf);
         }
         else
         {
-            if (!GameManager.instance.IsInMenu)
+           // if (!GameManager.instance.IsInMenu)
             {
                 #region stamina
                 if (Input.GetKeyDown(KeyCode.LeftShift) && stamina > 33.0f)
@@ -178,7 +182,7 @@ public class Player : Entity
                     lastAttackTime = now;
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                    AttemptToAttack(transform.position, (pz - transform.position));
+                    CmdAttemptToAttack(transform.position, (pz - transform.position));
                 }
                 else
                     if (Input.GetKeyDown(KeyCode.Mouse1) && (now - lastAttackTime > 1.5f))
@@ -186,7 +190,7 @@ public class Player : Entity
                     lastAttackTime = now;
                     Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pz.z = 0;
-                    FireArrow(transform.position, pz);
+                    CmdFireArrow(transform.position, pz);
                 }
             }
         }
@@ -225,7 +229,8 @@ public class Player : Entity
                 Debug.Log("Item \"" + itemData.name + "\" was added");
 
                 // Если получилось, уничтожаем предмет
-                Destroy(itemController.gameObject);
+                // Destroy(itemController.gameObject);
+                NetworkServer.Destroy(itemController.gameObject);
             }
         }
     }
@@ -249,7 +254,9 @@ public class Player : Entity
             Vector3 dropPosition = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, 0);
 
             // Создаём предмет
-            Instantiate(item.gameObject, dropPosition, Quaternion.identity);
+            var obj = Instantiate(item.gameObject, dropPosition, Quaternion.identity);
+            NetworkServer.Spawn(obj);
+
         }
         else
         {

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ItemController : MonoBehaviour
+public class ItemController : NetworkBehaviour
 {
     [SerializeField]
     public ItemData itemData;

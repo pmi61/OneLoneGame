@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Networking;
 
-public class Entity : MonoBehaviour
+public class Entity : NetworkBehaviour
 {
     #region LifeIndicators
     [Header("Health values:")]
     [SerializeField] protected float maxHealth;
-    [SerializeField] protected float health;
+    [SyncVar] [SerializeField] protected float health;
     [Header("Stamina values:")]
     [SerializeField] protected float maxStamina;
-    [SerializeField] protected float stamina;
+    [SyncVar] [SerializeField] protected float stamina;
     [SerializeField] protected float staminaDelta;
 
     public void SetMaxValues(float _health, float _stamina, float _staminaDelta)
@@ -123,27 +124,32 @@ public class Entity : MonoBehaviour
     /// <param name="origin"></param> место, откуда производится атака
     /// <param name="direction"></param> - направление атаки 
     /// Также <param name="enemyAI"></param> нужно изменить на тот скрипт, который отвечает за хп (LifeIndicators?)
-    IEnumerator DealDamage(Vector2 origin, Vector2 direction)
-    {
-        yield return new WaitForSeconds(0.1f);
-        Collider2D[] hit = Physics2D.OverlapCircleAll(attack.transform.position, slashAttackRadius, damageLayer);
-        foreach (Collider2D creature in hit)
-            if (creature != null && enemyTags.Contains(creature.transform.tag))
-                creature.GetComponent<Entity>().TakeDamage(slashDamage);
-    }
+    //IEnumerator DealDamage(Vector2 origin, Vector2 direction)
+    //{
+    //    yield return new WaitForSeconds(0.1f);
+    //    Collider2D[] hit = Physics2D.OverlapCircleAll(attack.transform.position, slashAttackRadius, damageLayer);
+    //    foreach (Collider2D creature in hit)
+    //        if (creature != null && enemyTags.Contains(creature.transform.tag))
+    //            creature.GetComponent<Entity>().TakeDamage(slashDamage);
+    //}
     /// <summary>
     /// Функция для попытки атаковать
     /// </summary>
     /// <param name="origin"></param> - место, откуда производится атака
     /// <param name="direction"></param> - направление атаки 
-    protected void AttemptToAttack(Vector2 origin, Vector2 direction)
+    protected void CmdAttemptToAttack(Vector2 origin, Vector2 direction)
     {
         direction.Normalize();
         attack = Instantiate(attackEffectPrefab);
         attack.transform.position = origin + direction;
         float angle = Vector3.SignedAngle(new Vector2(1, 0), (Vector2)attack.transform.position - origin, new Vector3(0, 0, 1));
         attack.transform.Rotate(0, 0, angle + 40);
-        StartCoroutine(DealDamage(origin, direction));
+        attack.GetComponent<effects>().enemyTags = enemyTags;
+        attack.GetComponent<effects>().slashAttackRadius = slashAttackRadius;
+        attack.GetComponent<effects>().slashDamage = slashDamage;
+        attack.GetComponent<effects>().damageLayer = damageLayer;
+        NetworkServer.Spawn(attack);
+        //StartCoroutine(DealDamage(origin, direction));
     }
     /// <summary>
     /// Выстрелить снаряда
@@ -153,10 +159,10 @@ public class Entity : MonoBehaviour
     /// <param name="enemyTags" - теги тех, кто будет поражен стрелой></param>
     /// <param name="startSpeed" - стартовая скорость></param>
     /// <param name="arrowPrefab" - префаб снаряда></param>
-    protected void FireArrow(Vector2 origin, Vector2 dst)
+    protected void CmdFireArrow(Vector2 origin, Vector2 dst)
     {
         GameObject arrow = Instantiate(arrowPrefab);
-        arrow.transform.position = origin + (dst - origin).normalized;
+        arrow.transform.position = origin + (dst - origin).normalized * 0.75f;
         Vector2 tmp = (dst - origin).normalized;
         float t = tmp.x;
         float angle = UnityEngine.Random.Range(-spreadAngle/2.0f, spreadAngle/2.0f);
@@ -167,6 +173,9 @@ public class Entity : MonoBehaviour
         arrow.GetComponent<projectileScript>().StartSpeed = arrowSpeed;
         arrow.GetComponent<projectileScript>().damage = arrowDamage;
         arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
+        arrow.GetComponent<Rigidbody2D>().velocity = tmp * arrowSpeed;
+        NetworkServer.Spawn(arrow);
+
     }
     #endregion
     #region Death
@@ -183,7 +192,8 @@ public class Entity : MonoBehaviour
             i.transform.position = transform.position;
         }
         Instantiate(Resources.Load<AudioSource>("Prefabs/Audio/DeathVoice"));
-        Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
+      //  Destroy(gameObject);
     }
     #endregion
 }

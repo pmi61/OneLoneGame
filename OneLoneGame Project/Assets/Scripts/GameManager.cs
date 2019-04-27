@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
-class GameManager : MonoBehaviour
+class GameManager : NetworkBehaviour
 {
     public static GameManager instance = null;
 
@@ -23,7 +24,7 @@ class GameManager : MonoBehaviour
 
     /* главный источник освещения */
     public TimeController TimeControl;
-    
+
     private void Awake()
     {
         Debug.Log("GameManaer Awake");
@@ -47,12 +48,13 @@ class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-
-        InitGame();
+        if (isServer)
+         InitGame();
     }
 
      public void InitGame()
     {
+        if (!isServer) return;
         Debug.Log("In GameManager : InitGame()");
 
         isGameRunning = true;
@@ -70,6 +72,8 @@ class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (!isLocalPlayer)
+            return;
         Debug.Log("In GameManager : GameOver()");
 
         isInMenu = true;

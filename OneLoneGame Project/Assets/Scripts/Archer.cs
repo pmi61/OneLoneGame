@@ -7,7 +7,7 @@ public class Archer : Enemy
     
     protected override void Attack(Transform creature)
     {
-           FireArrow(transform.position, creature.position);
+           CmdFireArrow(transform.position, creature.position);
     }
 
     protected override Vector2 GetMovement(Transform creature)

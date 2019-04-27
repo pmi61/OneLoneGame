@@ -6,7 +6,7 @@ public class Warrior : Enemy
 {
     protected override void Attack(Transform creature)
     {
-        AttemptToAttack(transform.position, creature.position - transform.position);
+        CmdAttemptToAttack(transform.position, creature.position - transform.position);
     }
 
 
