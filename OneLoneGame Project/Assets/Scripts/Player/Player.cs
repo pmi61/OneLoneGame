@@ -40,8 +40,16 @@ public class Player : Entity
     float stepTime;
     int stepNum;
     float lastStepTime;
+
+    // ресурсы (почему в игроке хранятся?..)
+    private UnityEngine.Object[] resources;
+
     void Start()
     {
+        if (isServer)
+        {
+            resources = Resources.LoadAll("Prefabs\\Items");
+        }
         if (!isLocalPlayer)
         {
             transform.FindChild("Main Camera").gameObject.SetActive(false);
@@ -230,11 +238,32 @@ public class Player : Entity
 
                 // Если получилось, уничтожаем предмет
                 // Destroy(itemController.gameObject);
-                NetworkServer.Destroy(itemController.gameObject);
+                CmdDestroyItem(itemController.GetComponent<NetworkIdentity>().netId);
+               // NetworkServer.Destroy(itemController.gameObject);
             }
         }
     }
 
+    [Command]
+    public void CmdDestroyItem(NetworkInstanceId networkID)
+    {
+        var item = ClientScene.FindLocalObject(networkID);
+        NetworkServer.Destroy(item);
+    }
+    [Command]
+    public void CmdSpawnItem(int item_ID, Vector3 position)//GameObject original,  Vector3 position, Quaternion rotation)
+        {
+        GameObject itemToSpawn = null;
+        foreach(UnityEngine.Object item in resources)
+        {
+            var i = (GameObject)item;
+            if (i.GetComponent<ItemController>().ID == item_ID)
+                itemToSpawn = i;
+        }
+         var it = Instantiate(itemToSpawn);
+        it.transform.position = position;
+          NetworkServer.Spawn(it);
+    }
     /// <summary>
     /// Функция, которая пытается извлечь предмет из текущей ячейки инвентаря и,
     /// если получилось, выбрасывает предмет
@@ -254,8 +283,8 @@ public class Player : Entity
             Vector3 dropPosition = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, 0);
 
             // Создаём предмет
-            var obj = Instantiate(item.gameObject, dropPosition, Quaternion.identity);
-            NetworkServer.Spawn(obj);
+            CmdSpawnItem(item.GetComponent<ItemController>().ID, dropPosition);//item.gameObject, dropPosition, Quaternion.identity);
+            // NetworkServer.Spawn(obj);
 
         }
         else

@@ -137,6 +137,8 @@ public class Entity : NetworkBehaviour
     /// </summary>
     /// <param name="origin"></param> - место, откуда производится атака
     /// <param name="direction"></param> - направление атаки 
+    /// 
+    [Command]
     protected void CmdAttemptToAttack(Vector2 origin, Vector2 direction)
     {
         direction.Normalize();
@@ -159,6 +161,8 @@ public class Entity : NetworkBehaviour
     /// <param name="enemyTags" - теги тех, кто будет поражен стрелой></param>
     /// <param name="startSpeed" - стартовая скорость></param>
     /// <param name="arrowPrefab" - префаб снаряда></param>
+    /// 
+    [Command]
     protected void CmdFireArrow(Vector2 origin, Vector2 dst)
     {
         GameObject arrow = Instantiate(arrowPrefab);

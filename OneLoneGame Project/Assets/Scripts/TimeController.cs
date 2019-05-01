@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-public class TimeController : MonoBehaviour
+using UnityEngine.Networking;
+public class TimeController : NetworkBehaviour
 {
     public TextMeshProUGUI timeText;
 
     public Light sun;
     public Light Sun { get { return sun; } }
 
-    public float timeInHours;
+   [SyncVar] public float timeInHours;
     [SerializeField] float speed;
     // Start is called before the first frame update
     void Start()

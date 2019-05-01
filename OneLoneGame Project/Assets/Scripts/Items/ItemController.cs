@@ -12,6 +12,11 @@ public class ItemController : NetworkBehaviour
     /// Маска слоя предметов
     /// </summary>
     public static LayerMask layerMask;
+        
+    /// <summary>
+    /// ID для мультиплеера
+    /// </summary>
+    public int ID = 0;
 
     private void Awake()
     {

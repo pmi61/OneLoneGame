@@ -16,3 +16,4 @@ MonoBehaviour:
   name: Bag
   description: Some Item
   maxInInventoryCell: 2
+  ID: 1

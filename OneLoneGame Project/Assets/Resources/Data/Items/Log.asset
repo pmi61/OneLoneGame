@@ -16,3 +16,4 @@ MonoBehaviour:
   name: Log
   description: Some Item
   maxInInventoryCell: 3
+  ID: 2

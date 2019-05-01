@@ -31,4 +31,9 @@ public class ItemData : ScriptableObject
     /// Максимальное количество предметов в одной ячейке инвентаря
     /// </summary>
     public int maxInInventoryCell = 1;
+
+    /// <summary>
+    /// ID предмета, добавлено для поддержки мультиплеера
+    /// </summary>
+    public int ID = 0;
 }

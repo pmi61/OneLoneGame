@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7248065328200715117}
   - component: {fileID: 1297315313338454615}
   - component: {fileID: 5292026644185548808}
+  - component: {fileID: 1969730491}
+  - component: {fileID: 1969730492}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ce1dae97bfc034fbaa0c8a07546f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGameRunning: 0
-  TimeControl: {fileID: 0}
+  isGameRunning: 1
+  TimeControl: {fileID: 1969730491}
 --- !u!114 &5292026644185548808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,5 +60,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c7750c97953c204ab0eec03e0382a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryCells: []
   cellNumber: 5
+--- !u!114 &1969730491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168820163173909588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e85517c727686743b9fd9aa364d6a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeText: {fileID: 0}
+  sun: {fileID: 0}
+  timeInHours: 5
+  speed: 0.1
+--- !u!114 &1969730492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9168820163173909588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

@@ -48,8 +48,8 @@ class GameManager : NetworkBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        if (isServer)
-         InitGame();
+       if (isServer)
+       InitGame();
     }
 
      public void InitGame()
