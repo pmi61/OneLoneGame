@@ -251,7 +251,7 @@ public class Player : Entity
         NetworkServer.Destroy(item);
     }
     [Command]
-    public void CmdSpawnItem(int item_ID, Vector3 position)//GameObject original,  Vector3 position, Quaternion rotation)
+    public void CmdSpawnItem(int item_ID, Vector3 position)
         {
         GameObject itemToSpawn = null;
         foreach(UnityEngine.Object item in resources)
