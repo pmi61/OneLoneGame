@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 
 public class Entity : NetworkBehaviour
 {
+    GameObject self;
     #region LifeIndicators
     [Header("Health values:")]
     [SerializeField] protected float maxHealth;
@@ -117,21 +118,6 @@ public class Entity : NetworkBehaviour
     protected float now;
     protected float lastAttackTime;
 
-
-    /// <summary>
-    /// Функция-корутина для ожидания 0.2 и нанесения урона
-    /// </summary>
-    /// <param name="origin"></param> место, откуда производится атака
-    /// <param name="direction"></param> - направление атаки 
-    /// Также <param name="enemyAI"></param> нужно изменить на тот скрипт, который отвечает за хп (LifeIndicators?)
-    //IEnumerator DealDamage(Vector2 origin, Vector2 direction)
-    //{
-    //    yield return new WaitForSeconds(0.1f);
-    //    Collider2D[] hit = Physics2D.OverlapCircleAll(attack.transform.position, slashAttackRadius, damageLayer);
-    //    foreach (Collider2D creature in hit)
-    //        if (creature != null && enemyTags.Contains(creature.transform.tag))
-    //            creature.GetComponent<Entity>().TakeDamage(slashDamage);
-    //}
     /// <summary>
     /// Функция для попытки атаковать
     /// </summary>
@@ -188,16 +174,22 @@ public class Entity : NetworkBehaviour
     /// 
     /// </summary>
     /// <param name="position" - место спавна вещей></param>
-    protected void Die()
+    /// 
+    [Command]
+    protected void CmdDie()
     {
         foreach (GameObject item in Loot)
         {
             GameObject i = Instantiate(item);
             i.transform.position = transform.position;
         }
-        Instantiate(Resources.Load<AudioSource>("Prefabs/Audio/DeathVoice"));
+        CmdSpawnSound(Resources.Load("Prefabs/Audio/DeathVoice") as GameObject);
         NetworkServer.Destroy(gameObject);
-      //  Destroy(gameObject);
+    }
+    [Command]
+    protected void CmdSpawnSound(GameObject t)
+    {
+        NetworkServer.Spawn(t);
     }
     #endregion
 }

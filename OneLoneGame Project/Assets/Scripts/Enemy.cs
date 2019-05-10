@@ -15,7 +15,7 @@ public class Enemy : NonPlayer
     protected override void Live()
     {
         if (health <= 0)
-            Die();
+            CmdDie();
         Transform nearestEnemy = FindClosestVisibleEnemy();
         float distance = aggroDistance + 1;
         if (nearestEnemy != null)

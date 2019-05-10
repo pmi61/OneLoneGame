@@ -7,18 +7,18 @@ public class CustomNetworkManager : NetworkManager
 {
     public void startHost()
     {
-        base.StartHost();
+        StartHost();
     }
 
     public void startClient()
     {
-        base.StartClient();
+       StartClient();
     }
 
     public void disconnect()
     {
-        base.StopClient();
-        base.StopServer();
+        StopClient();
+        StopServer();
     }
     
 }

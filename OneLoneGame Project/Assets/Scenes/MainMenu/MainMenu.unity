@@ -419,7 +419,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 699070567}
+      - m_Target: {fileID: 0}
         m_MethodName: disconnect
         m_Mode: 1
         m_Arguments:
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 699070567}
+      - m_Target: {fileID: 0}
         m_MethodName: startClient
         m_Mode: 1
         m_Arguments:
@@ -2285,18 +2285,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687842003}
   m_CullTransparentMesh: 0
---- !u!114 &699070567 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 871270367847459155, guid: c286065ae0ca8b449a05e1c09df88533,
-    type: 3}
-  m_PrefabInstance: {fileID: 871270368259985716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30f415bf925f76343b23d6d53b91f424, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &701475680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2999,7 +2987,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 699070567}
+      - m_Target: {fileID: 0}
         m_MethodName: startHost
         m_Mode: 1
         m_Arguments:
@@ -5512,6 +5500,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 871270367847459153, guid: c286065ae0ca8b449a05e1c09df88533, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c286065ae0ca8b449a05e1c09df88533, type: 3}

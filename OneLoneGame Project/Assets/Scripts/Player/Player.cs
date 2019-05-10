@@ -89,7 +89,9 @@ public class Player : Entity
             #region LifeCheck
             if (health <= 0)
             {
-                GameManager.instance.GameOver();
+                if(isClient)
+                NetworkManager.singleton.StopClient();
+               // GameManager.instance.GameOver();
                 return;
             }
             if (hunger <= 0)
@@ -209,13 +211,10 @@ public class Player : Entity
             GameObject t = Instantiate(steps[stepNum] as GameObject);
             stepNum = (stepNum + 2) % 3;
             t.transform.position = transform.position;
+            CmdSpawnSound(t);
         }
-
         #endregion
-
-
     }
-
     /// <summary>
     /// Функция, которая пытается добавить предметы рядом с игроком в инвентарь
     /// </summary>
@@ -283,8 +282,7 @@ public class Player : Entity
             Vector3 dropPosition = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, 0);
 
             // Создаём предмет
-            CmdSpawnItem(item.GetComponent<ItemController>().ID, dropPosition);//item.gameObject, dropPosition, Quaternion.identity);
-            // NetworkServer.Spawn(obj);
+            CmdSpawnItem(item.GetComponent<ItemController>().ID, dropPosition);
 
         }
         else
