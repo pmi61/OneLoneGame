@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  health: 1
+  health: 100
   maxStamina: 100
   stamina: 0
   staminaDelta: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   visibleTargets: []
-  offset: 1
+  offset: 1.3
   aggroDistance: 10
 --- !u!114 &1600773944401423236
 MonoBehaviour:
