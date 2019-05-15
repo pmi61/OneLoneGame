@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using TMPro;
-
+using UnityEngine.UI;
 public class Player_networking : NetworkBehaviour
 {
     [SerializeField] private TextMeshProUGUI TMP;
     [SerializeField] private GameObject GM;
+
+    [SyncVar]
+    public string nickname;
+
+
+    public void setNickname(string name)
+    {
+        nickname = name;
+    }
+    
+
     public override void OnStartLocalPlayer()
     {
-        // base.OnStartLocalPlayer();
+         base.OnStartLocalPlayer();
+        //CmdSetPlayerName(nickname);
         if (isClient)
         {
             var GO = GameObject.Find("GameManager");
@@ -18,6 +30,7 @@ public class Player_networking : NetworkBehaviour
             transform.Find("UI").gameObject.SetActive(true);
             transform.Find("Main Camera").gameObject.SetActive(true);
         }
+
     }
     public override void PreStartClient()
     {

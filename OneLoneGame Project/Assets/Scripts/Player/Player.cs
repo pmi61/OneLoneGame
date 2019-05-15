@@ -41,11 +41,21 @@ public class Player : Entity
     int stepNum;
     float lastStepTime;
 
+
+
     // ресурсы (почему в игроке хранятся?..)
     private UnityEngine.Object[] resources;
 
+
+
+ 
+
+
+
     void Start()
     {
+         
+
         if (isServer)
         {
             resources = Resources.LoadAll("Prefabs\\Items");

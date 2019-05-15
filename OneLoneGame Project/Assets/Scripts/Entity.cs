@@ -139,6 +139,13 @@ public class Entity : NetworkBehaviour
         NetworkServer.Spawn(attack);
         //StartCoroutine(DealDamage(origin, direction));
     }
+
+
+    [ClientRpc]
+    void RpcSpawn(GameObject item)
+    {
+        Instantiate(item);
+    }
     /// <summary>
     /// Выстрелить снаряда
     /// </summary>
@@ -165,6 +172,7 @@ public class Entity : NetworkBehaviour
         arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
         arrow.GetComponent<Rigidbody2D>().velocity = tmp * arrowSpeed;
         NetworkServer.Spawn(arrow);
+        RpcSpawn(arrow);
 
     }
     #endregion
