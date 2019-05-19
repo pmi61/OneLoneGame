@@ -142,9 +142,23 @@ public class Entity : NetworkBehaviour
 
 
     [ClientRpc]
-    void RpcSpawn(GameObject item)
+    void RpcSpawnArrow(Vector2 movement, float arrowSpeed, float arrowDamage, Vector2 origin, Vector2 dst, params string[] enemyTags)
     {
-        Instantiate(item);
+        
+            GameObject arrow = Instantiate(arrowPrefab);
+            arrow.transform.position = origin + (dst - origin).normalized * 0.75f;
+            Vector2 tmp = (dst - origin).normalized;
+            float t = tmp.x;
+            float angle = UnityEngine.Random.Range(-spreadAngle / 2.0f, spreadAngle / 2.0f);
+            angle = angle * Mathf.PI / 180.0f;
+            tmp.x = t * Mathf.Cos(angle) - tmp.y * Mathf.Sin(angle);
+            tmp.y = t * Mathf.Sin(angle) + tmp.y * Mathf.Cos(angle);
+            arrow.GetComponent<projectileScript>().Movement = tmp;
+            arrow.GetComponent<projectileScript>().StartSpeed = arrowSpeed;
+            arrow.GetComponent<projectileScript>().damage = arrowDamage;
+            arrow.GetComponent<Rigidbody2D>().velocity = tmp * arrowSpeed;
+            foreach (var i in enemyTags)
+                arrow.GetComponent<projectileScript>().enemyTags.Add(i);
     }
     /// <summary>
     /// Выстрелить снаряда
@@ -171,8 +185,12 @@ public class Entity : NetworkBehaviour
         arrow.GetComponent<projectileScript>().damage = arrowDamage;
         arrow.GetComponent<projectileScript>().enemyTags = enemyTags;
         arrow.GetComponent<Rigidbody2D>().velocity = tmp * arrowSpeed;
-        NetworkServer.Spawn(arrow);
-        RpcSpawn(arrow);
+       // NetworkServer.Spawn(arrow);
+        string[] enem = new string[enemyTags.Count];
+        for (int i = 0; i < enem.Length; i++)
+            enem[i] = enemyTags[i];
+
+        RpcSpawnArrow(tmp, arrowSpeed,arrowDamage, origin, dst, enem);
 
     }
     #endregion

@@ -27,7 +27,7 @@ public class CustomNetworkManager : NetworkManager
 
     void setIPAdress()
     {
-        NetworkManager.singleton.networkAddress = "127.0.0.1";
+       // NetworkManager.singleton.networkAddress = "127.0.0.1";
     }
 
     private void OnLevelWasLoaded(int level)

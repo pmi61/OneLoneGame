@@ -62,7 +62,7 @@ public class Player : Entity
         }
         if (!isLocalPlayer)
         {
-            transform.FindChild("Main Camera").gameObject.SetActive(false);
+            transform.Find("Main Camera").gameObject.SetActive(false);
             return;
         }
         stepNum = 0;
@@ -86,7 +86,11 @@ public class Player : Entity
     void Update()
     {
         if (!isLocalPlayer)
+        {
+            rb.velocity = new Vector2(0, 0);
+
             return;
+        }
         if (!GameManager.instance.isGameRunning)
         {
             rb.velocity = new Vector2(0, 0);
@@ -94,8 +98,6 @@ public class Player : Entity
         }
         now = Time.time;
         // проверка жизненых показателей
-        if (!GameManager.instance.IsInMenu)
-        {
             #region LifeCheck
             if (health <= 0)
             {
@@ -162,10 +164,7 @@ public class Player : Entity
             // Пытаемся добавить все предметы в некотором радиусе
             AttemptAddItems();
             #endregion
-
-        }
-        else
-            rb.velocity = new Vector2(0, 0);
+        
         #region Input
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {

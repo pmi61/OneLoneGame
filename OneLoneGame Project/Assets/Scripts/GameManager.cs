@@ -25,6 +25,13 @@ class GameManager : NetworkBehaviour
     /* главный источник освещения */
     public TimeController TimeControl;
 
+    private void Start()
+    {
+        menus = GameObject.Find("ESCMenu");
+        UI = GameObject.Find("Menus");
+        isInMenu = false;
+    }
+
     private void Awake()
     {
         Debug.Log("GameManaer Awake");
@@ -58,9 +65,7 @@ class GameManager : NetworkBehaviour
         Debug.Log("In GameManager : InitGame()");
 
         isGameRunning = true;
-        menus = GameObject.Find("Menus");
-        UI = GameObject.Find("UI");
-        isInMenu = false;
+       
 
         if (menus == null)
         {
@@ -104,11 +109,23 @@ class GameManager : NetworkBehaviour
 
     public void OnESC()
     {
-        menus.transform.Find("ESCMenu").gameObject.SetActive(!IsInMenu);
+        menus.gameObject.SetActive(!IsInMenu);
         UI.GetComponent<Canvas>().enabled = !UI.GetComponent<Canvas>().enabled;
         isInMenu = !isInMenu;
         menus.GetComponent<Canvas>().enabled = !menus.GetComponent<Canvas>().enabled;
 
+    }
+    
+    public void OnContinue()
+    {
+        UI.GetComponent<Canvas>().enabled = !UI.GetComponent<Canvas>().enabled;
+        menus.gameObject.SetActive(false);
+        isInMenu = false;
+    }
+
+    public void ExitFromGame()
+    {
+        Application.Quit();
     }
 }
 

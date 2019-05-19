@@ -46,11 +46,12 @@ public class projectileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.IsInMenu)
-        {
-            travelledDistance += speed * Time.deltaTime;
-           // transform.position += movement * speed * Time.deltaTime;
-        }
+       // transform.position += movement * startSpeed;
+        //if (!GameManager.instance.IsInMenu)
+        //{
+        //    travelledDistance += speed * Time.deltaTime;
+        //   // transform.position += movement * speed * Time.deltaTime;
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

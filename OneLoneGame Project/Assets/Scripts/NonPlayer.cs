@@ -73,7 +73,7 @@ public class NonPlayer : Entity
     // Update is called once per frame
     protected void Update()
     {
-        if (!GameManager.instance.isGameRunning || GameManager.instance.IsInMenu)
+        if (!GameManager.instance.isGameRunning)
             return;
         now = Time.time;
         Live();

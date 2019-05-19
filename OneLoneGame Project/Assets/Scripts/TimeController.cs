@@ -23,7 +23,7 @@ public class TimeController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.IsInMenu || !GameManager.instance.isGameRunning)
+        if (!GameManager.instance.isGameRunning)
             return;
         string t = ((int)timeInHours).ToString() + ":";
         float d = timeInHours - (int)timeInHours;
