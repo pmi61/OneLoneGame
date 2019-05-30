@@ -198,10 +198,9 @@ MonoBehaviour:
   stamina: 0
   staminaDelta: 10
   rb: {fileID: 1926223205066309525}
-  startSpeed: 2
+  startSpeed: 0
   animator: {fileID: 0}
   enemyTags:
-  - Enemy
   - Player
   attackEffectPrefab: {fileID: 3478898340287225911, guid: 83b26d38ca01829479fcb9ed8e30a124,
     type: 3}
@@ -209,7 +208,7 @@ MonoBehaviour:
     type: 3}
   arrowSpeed: 5
   arrowDamage: 10
-  spreadAngle: 120
+  spreadAngle: 60
   slashAttackRadius: 1
   slashDamage: 10
   damageLayer:

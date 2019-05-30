@@ -15,7 +15,7 @@ public class TimeController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       timeInHours = 0;
+       timeInHours = 11.8f;
         sun.intensity = 1;
         sun.GetComponent<LighintScript>().time = LighintScript.state.daytime;
     }

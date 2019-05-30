@@ -1,0 +1,1433 @@
+fileFormatVersion: 2
+guid: b87f78e7abc0e2a43954fed46eca5192
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_0
+    21300002: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_1
+    21300004: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_2
+    21300006: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_3
+    21300008: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_4
+    21300010: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_5
+    21300012: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_6
+    21300014: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_7
+    21300016: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_8
+    21300018: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_9
+    21300020: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_10
+    21300022: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_11
+    21300024: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_12
+    21300026: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_13
+    21300028: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_14
+    21300030: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_15
+    21300032: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_16
+    21300034: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_17
+    21300036: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_18
+    21300038: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_19
+    21300040: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_20
+    21300042: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_21
+    21300044: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_22
+    21300046: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_23
+    21300048: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_24
+    21300050: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_25
+    21300052: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_26
+    21300054: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_27
+    21300056: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_28
+    21300058: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_29
+    21300060: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_30
+    21300062: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_31
+    21300064: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_32
+    21300066: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_33
+    21300068: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_34
+    21300070: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_35
+    21300072: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_36
+    21300074: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_37
+    21300076: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_38
+    21300078: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_39
+    21300080: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_40
+    21300082: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_41
+    21300084: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_42
+    21300086: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_43
+    21300088: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_44
+    21300090: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_45
+    21300092: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_46
+    21300094: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_47
+    21300096: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_48
+    21300098: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_49
+    21300100: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_50
+    21300102: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_51
+    21300104: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_52
+    21300106: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_53
+    21300108: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_54
+    21300110: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_55
+    21300112: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_56
+    21300114: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_57
+    21300116: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_58
+    21300118: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_59
+    21300120: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_60
+    21300122: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_61
+    21300124: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_62
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08a4c065f448bb64ca5c238e002a2291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c549d4444fbab3248a3021037626bf1b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_2
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b57fa011c819f14890db39835ac5027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_3
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 446d33c46c045d34ab359493985af728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_4
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a5d55a09c6bd574dac901d2dc02d574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_5
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4569da33772c68a43ab553787375b251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6454a317ac622fd448f843c6c2130388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_7
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad88772c662c45439811896961dc3fa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_8
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 352
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 394149d80fe3fbb4f90d043660042221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d2e59d871ac275408c529ad6f7bd73e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_10
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 068bc65003596064d893e0c697be2ba5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_11
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09851b25e74c210489d175531be5747c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_12
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fdcc38b0db26c646a915075828a3ef9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_13
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d67d15d77c65cbc469b712dd4b962a8a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_14
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e04ff95e765f0f4abb785155b0f9872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_15
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 927e70fa3801923438d64b04b0f48d09
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_16
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4497fb3905b0194e887ddb98e3193ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_17
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 296
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e62ea1353aa3b024fa80a9722ac64079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0956a2fad8cc5f4db588a47a277627b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_19
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f85413d8a49f11468af9239ec7d81fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_20
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56a3655dc9b5c0444b240ab8bf63817e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_21
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 411c652b5cad39d4eac9db4add0b2bef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_22
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17ef0e87b71fa044aeee01a5a3086aa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_23
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 829247a0d61b4e44f92234c5cc117c22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_24
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8530b49da3a67448aa7bcfa0efaddca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_25
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a136d73f76f1bc8499b702edda202d4b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_26
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 240
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67b7a889f23fa1f44a2a947bbdbcd630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 2}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fe841f312b9bb54298c7fe76da737ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_28
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 182
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 3, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 015dafba2a2ea284a98496d7cec6a000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_29
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79abf3dd89940d9488e1994a392d9b30
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_30
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c69094e67a863445aa79a94c916bb81
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_31
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c807233e39c9ac3408370917a0d779e8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_32
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e6ab8a94fdb24a4d88f153669f4bd73
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_33
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f7bbbdaa2ce62d47a61030b5dc132c8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_34
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecb6ad2ef53609b43adbc22766480dd9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_35
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 184
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8305f941e844040ad04a0b6f0a65a7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69c198c17d2ffc44b8cc117523d5da0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_37
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 885ee750f7cc63643b4ed4dcd2f71a4f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_38
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d27e4e7ae6bdd2748a545bdd4d92070e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_39
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a15844093266b41b392e1659f208bb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_40
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f197343f228cbe4490803bf2bb3e7dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_41
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa1f8b5ae2dcff4b8becaf0db3cb342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_42
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b9b875a98472f74b913e64e927eeaa0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_43
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfd2f767feef03742a07075303a96194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_44
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 128
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f6b13c39f07b44ebf3a33324713f9a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3287e92b637fe1840981026fb0eb62da
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_46
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6388beef98f8c854db9279f8aa611f90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_47
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f948d8c741ff6448f3fdddc66a34fd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_48
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f065f2d5c9bc3df489c65fac36246d92
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_49
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29b51050494b8094a9a1c3178c4ee12d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_50
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e787c04af7ed60419c68967663db813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_51
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 193b54b4ca326a34ca44451a96562430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_52
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3e90b0a1195904e8a242c0ffa0dc4a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_53
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 72
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a22a56cd46c55043bb635b90e1482f7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1962e25784add0f43a5484e74eaf4636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_55
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa9e5f70c0438c94fa21e364e83db70c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_56
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fec28c1c484cdb42beddb8ebb999a4f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_57
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46b916026739b3a44844195ebefae89e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_58
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25668ae090210fd4a852d0624b1d9c59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_59
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93aa94c5ced0c444babb1af101857f0f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_60
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 584abcb345777ff49991fcd0e39d4c50
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_61
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c45a0ac12860e849a88905a8135440a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: wall-sprites-the-brick-walls-appear-to-stick-out-like-those-in-maker-stone_62
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 16
+        width: 60
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4efcf827e60db444a94863bb3307aaef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: e45daabfc9fc8b5488a63ba8c96eee8f
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
